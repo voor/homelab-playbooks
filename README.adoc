@@ -1,0 +1,6 @@
+= Fedora Configuration Scripts
+Robert Van Voorhees <rcvanvo@gmail.com>
+
+Just a repository for keeping some basic scripts for rapidly setting up a new Fedora workstation and configuring a nice look and feel.
+
+I find myself reinstalling Fedora fairly often, and I wanted to be able to get all the tools that I like to use installed quickly.
