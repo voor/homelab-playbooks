@@ -1,0 +1,8 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Name=Chrome Hangouts
+Comment=Starts Google Hangouts in app mode
+Type=Application
+Exec=/usr/bin/google-chrome --app="https://hangouts.google.com"
+Icon=~/.icons/Hangouts_Icon.png
