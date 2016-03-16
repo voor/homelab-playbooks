@@ -5,4 +5,4 @@
 sudo dnf copr enable -y helber/atom
 sudo dnf -y install atom
 # A bunch of packages I feel help enhance atom well.
-apm install atom-beautify atom-material-syntax atom-material-syntax-light atom-material-ui sort-lines
+apm install atom-beautify atom-material-syntax atom-material-syntax-light atom-material-ui sort-lines language-asciidoc
