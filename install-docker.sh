@@ -14,7 +14,4 @@ sudo dnf install -y docker-engine
 sudo systemctl start docker
 sudo systemctl enable docker
 sudo usermod -aG docker `whoami`
-# This will install of the dependencies, but it's usually outdated
 sudo dnf install -y docker-compose
-sudo sh -c "curl -L https://github.com/docker/compose/releases/download/1.6.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose"
-sudo chmod +x /usr/local/bin/docker-compose
