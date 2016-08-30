@@ -1,5 +1,14 @@
-wget https://dl.google.com/linux/linux_signing_key.pub
-sudo rpm --import linux_signing_key.pub
+curl -o google_chrome.pub https://dl.google.com/linux/linux_signing_key.pub && \
+  sudo rpm --import google_chrome.pub && \
+  rm -rf google_chrome.pub
+
+curl -o oracle_vbox.asc https://www.virtualbox.org/download/oracle_vbox.asc && \
+  sudo rpm --import oracle_vbox.asc && \
+  rm -rf oracle_vbox.asc
+
+curl -o docker.gpg https://yum.dockerproject.org/gpg && \
+  sudo rpm --import docker.gpg && \
+  rm -rf docker.gpg
 
 su -c 'dnf install -y http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm'
 
@@ -8,7 +17,7 @@ sudo dnf install -y https://downloads.slack-edge.com/linux_releases/slack-2.1.2-
 sudo cp -r yum.repos.d/* /etc/yum.repos.d/
 
 sudo dnf upgrade --refresh -y
-sudo dnf install -y google-chrome-stable
+sudo dnf install -y google-chrome-stable VirtualBox-5.1 kernel-devel kernel-headers
 
 git clone https://github.com/google/fonts.git --depth=1 ~/.fonts
 fc-cache -f -v
