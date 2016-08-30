@@ -27,7 +27,7 @@ apm install \
   language-groovy \
   linter \
   linter-tslint \
-  pigments
+  pigments \
   project-manager \
   sort-lines \
   split-diff
