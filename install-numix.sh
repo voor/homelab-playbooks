@@ -27,3 +27,8 @@ git clone https://github.com/deadalnix/pixel-saver.git /tmp/pixel-saver && \
 
 gsettings set org.gnome.desktop.interface gtk-theme "Numix" && \
   gsettings set org.gnome.desktop.wm.preferences theme "Numix"
+
+mkdir -p ~/.local/share/applications/
+mkdir -p ~/.icons/
+cp -r ./.local/share/applications/ ~/.local/share/
+cp -r ./.icons/ ~

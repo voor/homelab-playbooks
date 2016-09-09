@@ -21,3 +21,6 @@ sudo dnf install -y google-chrome-stable VirtualBox-5.1 kernel-devel kernel-head
 
 git clone https://github.com/google/fonts.git --depth=1 ~/.fonts
 fc-cache -f -v
+
+sudo dnf copr enable -y mkrawiec/watchman && \
+  sudo dnf install -y watchman
