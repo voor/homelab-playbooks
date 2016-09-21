@@ -8,6 +8,7 @@ git config --global user.email rcvanvo@gmail.com
 git config --global merge.tool meld
 git config --global gpg.program gpg2
 git config --global commit.gpgsign true
+git config --global push.default simple
 # Run this after you import keys.
 # git config --global user.signingkey
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
