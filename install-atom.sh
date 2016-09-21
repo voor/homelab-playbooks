@@ -3,7 +3,7 @@
 sudo dnf install -y fedora-repos-rawhide
 # Right now this command has a problem of upgrading gnome-shell and various other libraries to unstable versions.
 # Just do nodejs-1:6.3.1-1.fc25.x86_64 so we don't have issues with gnome-shell etc.
-sudo dnf install -y --enablerepo=rawhide nodejs-1:6.3.1-1.fc25.x86_64 --best --allowerasing
+sudo dnf install -y https://kojipkgs.fedoraproject.org//packages/nodejs/6.3.1/100.fc25/x86_64/nodejs-6.3.1-100.fc25.x86_64.rpm https://kojipkgs.fedoraproject.org//packages/nodejs/6.3.1/100.fc25/x86_64/npm-3.10.3-100.fc25.x86_64.rpm
 
 # Activate the Atom COPR from mosquito
 # https://copr.fedorainfracloud.org/coprs/mosquito/atom/

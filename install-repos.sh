@@ -17,7 +17,7 @@ sudo dnf install -y https://downloads.slack-edge.com/linux_releases/slack-2.1.2-
 sudo cp -r yum.repos.d/* /etc/yum.repos.d/
 
 sudo dnf upgrade --refresh -y
-sudo dnf install -y google-chrome-stable VirtualBox-5.1 kernel-devel kernel-headers
+sudo dnf install -y google-chrome-stable VirtualBox kernel-devel kernel-headers
 
 git clone https://github.com/google/fonts.git --depth=1 ~/.fonts
 fc-cache -f -v
