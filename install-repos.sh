@@ -19,6 +19,8 @@ sudo cp -r yum.repos.d/* /etc/yum.repos.d/
 sudo dnf upgrade --refresh -y
 sudo dnf install -y google-chrome-stable VirtualBox kernel-devel kernel-headers
 
+sudo dnf install -y gstreamer{1,}-{ffmpeg,libav,plugins-{good,ugly,bad{,-free,-nonfree}}} --setopt=strict=0
+
 git clone https://github.com/google/fonts.git --depth=1 ~/.fonts
 fc-cache -f -v
 
