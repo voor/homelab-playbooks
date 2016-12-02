@@ -1,0 +1,16 @@
+#
+# Systemd unit file for CouchPotatoServer
+#
+
+[Unit]
+Description=CouchPotatoServer Daemon
+
+[Service]
+Type=forking
+User=ruser
+Group=ruser
+ExecStart=/usr/bin/python /home/ruser/git/couchpotatoserver/CouchPotato.py --daemon --data_dir=/home/ruser/.couchpotatoserver --config_file=/home/ruser/.couchpotatoserver/config.ini
+GuessMainPID=no
+
+[Install]
+WantedBy=multi-user.target

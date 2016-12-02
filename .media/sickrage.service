@@ -1,0 +1,16 @@
+#
+# Systemd unit file for SickRage
+#
+
+[Unit]
+Description=SickRage Daemon
+
+[Service]
+Type=forking
+User=ruser
+Group=ruser
+ExecStart=/usr/bin/python /home/ruser/git/sickrage/SickBeard.py --daemon --datadir=/home/ruser/.sickrage/
+GuessMainPID=no
+
+[Install]
+WantedBy=multi-user.target
