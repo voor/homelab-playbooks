@@ -1,0 +1,26 @@
+<advancedsettings>
+    <videodatabase>
+        <type>mysql</type>
+        <host>rs.planetvoor.com</host>
+        <port>3306</port>
+        <user>xbmc</user>
+        <pass>xbmc</pass>
+    </videodatabase>
+    <musicdatabase>
+        <type>mysql</type>
+        <host>rs.planetvoor.com</host>
+        <port>3306</port>
+        <user>xbmc</user>
+        <pass>xbmc</pass>
+    </musicdatabase>
+    <videolibrary>
+        <importwatchedstate>true</importwatchedstate>
+        <importresumepoint>true</importresumepoint>
+    </videolibrary>
+    <pathsubstitution>
+        <substitute>
+            <from>/mnt/</from>
+            <to>/storage/mnt/</to>
+        </substitute>
+    </pathsubstitution>
+</advancedsettings>
