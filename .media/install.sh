@@ -1,4 +1,4 @@
-#!/bin/env sh
+#!/usr/bin/env sh
 
 tar -xvf configuration.tar.gz
 cp configuration/* ~
