@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+
+certbot --apache \
+  -d cps.planetvoor.com \
+  -d deluge.planetvoor.com \
+  -d freenas.planetvoor.com \
+  -d gr.planetvoor.com \
+  -d gym.planetvoor.com \
+  -d mb.planetvoor.com \
+  -d mylar.planetvoor.com \
+  -d pms.planetvoor.com \
+  -d rs.planetvoor.com \
+  -d sab.planetvoor.com \
+  -d scanner.planetvoor.com \
+  -d sr.planetvoor.com \
+  -d unifi.planetvoor.com
