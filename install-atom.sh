@@ -1,18 +1,9 @@
 #!/usr/bin/env bash
 
-sudo dnf install -y fedora-repos-rawhide
-# Right now this command has a problem of upgrading gnome-shell and various other libraries to unstable versions.
-# Just do nodejs-1:6.3.1-1.fc25.x86_64 so we don't have issues with gnome-shell etc.
-sudo dnf install -y https://kojipkgs.fedoraproject.org//packages/nodejs/6.3.1/100.fc25/x86_64/nodejs-6.3.1-100.fc25.x86_64.rpm https://kojipkgs.fedoraproject.org//packages/nodejs/6.3.1/100.fc25/x86_64/npm-3.10.3-100.fc25.x86_64.rpm
+sudo dnf install -y fedora-repos-rawhide nodejs jq
 
-# Activate the Atom COPR from mosquito
-# https://copr.fedorainfracloud.org/coprs/mosquito/atom/
-# sudo dnf copr enable -y mosquito/atom
-# sudo dnf -y install atom
-# Switched to using Atom's official RPM
-curl -L -o atom.rpm https://atom.io/download/rpm
-sudo dnf install -y atom.rpm && \
-  rm -rf atom.rpm
+sudo dnf install -y `curl -s https://api.github.com/repos/atom/atom/releases/latest | jq --raw-output -c '.assets[] | select(.name | contains("atom.x86_64.rpm")) | .browser_download_url'`
+
 # A bunch of packages I feel help enhance atom well.
 apm install \
   asciidoc-preview \
