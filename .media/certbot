@@ -8,7 +8,7 @@ certbot --apache \
   -d gym.planetvoor.com \
   -d mb.planetvoor.com \
   -d mylar.planetvoor.com \
-  -d pms.planetvoor.com \
+  -d emby.planetvoor.com \
   -d rs.planetvoor.com \
   -d sab.planetvoor.com \
   -d scanner.planetvoor.com \
