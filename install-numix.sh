@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 
-sudo dnf copr enable -y numix/numix
-sudo dnf install -y gnome-tweak-tool numix-\*
-mkdir -p ~/.config/gtk-3.0/
-# Makes the Numix header bars smaller.
-ln -sf `pwd`/.config/gtk-3.0/gtk.css ~/.config/gtk-3.0/gtk.css
+sudo dnf install gnome-tweak-tool paper-icon-theme paper-gtk-theme
 
 # Popular Gnome Extensions that improve the environment
 mkdir -p ~/.local/share/gnome-shell/extensions/
@@ -25,8 +21,10 @@ git clone https://github.com/deadalnix/pixel-saver.git /tmp/pixel-saver && \
   rm -rf /tmp/pixel-saver && \
   gnome-shell-extension-tool -e pixel-saver@deadalnix.me
 
-gsettings set org.gnome.desktop.interface gtk-theme "Numix" && \
-  gsettings set org.gnome.desktop.wm.preferences theme "Numix"
+gsettings set org.gnome.desktop.interface gtk-theme "Paper" && \
+  gsettings set org.gnome.desktop.interface icon-theme "Paper" && \
+  gsettings set org.gnome.desktop.interface cursor-theme "Paper" && \
+  gsettings set org.gnome.desktop.wm.preferences theme "Paper"
 
 mkdir -p ~/.local/share/applications/
 mkdir -p ~/.icons/

@@ -1,0 +1,7 @@
+[home_snwh_paper]
+name=Paper Project (Fedora_$releasever)
+type=rpm-md
+baseurl=http://download.opensuse.org/repositories/home:/snwh:/paper/Fedora_$releasever/
+gpgcheck=1
+gpgkey=http://download.opensuse.org/repositories/home:/snwh:/paper/Fedora_$releasever/repodata/repomd.xml.key
+enabled=1
