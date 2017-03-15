@@ -4,5 +4,5 @@
 ./install-atom.sh
 ./install-docker.sh
 ./install-intellij.sh
-./install-numix.sh
+./install-paper.sh
 ./install-oh-my-zsh.sh
