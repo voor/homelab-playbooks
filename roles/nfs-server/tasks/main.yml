@@ -1,0 +1,78 @@
+- name: Ensure NFS utilities are installed.
+  package:
+    name: nfs-utils
+    state: installed
+
+- name: Allow services over firewall.
+  firewalld:
+    service: "{{ item }}"
+    permanent: true
+    state: enabled
+    zone: internal
+    immediate: yes
+  with_items:
+    - nfs
+    - rpc-bind
+    - mountd
+
+- name: Disallow services over firewall.
+  firewalld:
+    service: "{{ item }}"
+    permanent: true
+    state: disabled
+    zone: internal
+    immediate: yes
+  with_items:
+    - samba-client
+    - ipp-client
+
+- name: Move server into internal zone.
+  firewalld:
+    zone: trusted
+    interface: enp10s0f1
+    permanent: true
+    state: enabled
+
+- name: Ensure rpcbind is running.
+  service:
+    name: rpcbind
+    state: started
+    enabled: yes
+
+- name: Ensure directories to export exist
+  file: 'path="{{ item.strip().split()[0] }}" state=directory'
+  with_items: "{{ nfs_exports }}"
+  notify: restart nfs
+
+- name: Copy exports file.
+  template:
+    src: exports.j2
+    dest: /etc/exports.d/storage.exports
+    owner: root
+    group: root
+    mode: 0644
+  register: nfs_exports_copy
+  notify: restart nfs
+
+- name: Copy imapd file.
+  template:
+    src: imapd.conf.j2
+    dest: /etc/idmapd.conf
+    owner: root
+    group: root
+    mode: 0644
+  register: nfs_exports_copy
+  notify: restart nfs
+
+- name: Restart NFS immediately if exports are updated.
+  service:
+    name: nfs-server
+    state: restarted
+  when: nfs_exports_copy.changed
+
+- name: Ensure nfs is running.
+  service:
+    name: nfs-server
+    state: restarted
+    enabled: yes
+  when: nfs_exports|length

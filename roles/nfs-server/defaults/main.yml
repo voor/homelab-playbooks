@@ -1,0 +1,4 @@
+---
+dns_domain_name: planetvoor.com
+nfs_exports: [ "/storage/mnt *(rw,no_subtree_check,async,sec=krb5i,fsid=0)" ]
+nfs_server_user: nobody
