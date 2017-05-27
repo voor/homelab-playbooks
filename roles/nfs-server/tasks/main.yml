@@ -1,3 +1,12 @@
+- name: Install Ansible Python 2 Dependencies
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - python-firewall
+    - libselinux-python
+    - libsemanage-python
+
 - name: Ensure NFS utilities are installed.
   package:
     name: nfs-utils
@@ -56,7 +65,7 @@
 
 - name: Copy imapd file.
   template:
-    src: imapd.conf.j2
+    src: idmapd.conf.j2
     dest: /etc/idmapd.conf
     owner: root
     group: root
