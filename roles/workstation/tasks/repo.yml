@@ -1,0 +1,43 @@
+- name: Google Linux signing key
+  rpm_key:
+    state: present
+    key: https://dl.google.com/linux/linux_signing_key.pub
+
+- name: Oracle Virtual Box signing key.
+  rpm_key:
+    state: present
+    key: https://www.virtualbox.org/download/oracle_vbox.asc
+
+- name: Docker signing key.
+  rpm_key:
+    state: present
+    key: https://yum.dockerproject.org/gpg
+
+- name: RPM Fusion Free and Non-Free
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_current }}.noarch.rpm
+    - http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_current }}.noarch.rpm
+
+- name: Slack Desktop App
+  package:
+    name: https://downloads.slack-edge.com/linux_releases/slack-2.6.2-0.1.fc21.x86_64.rpm
+    state: present
+
+- name: Google Chrome repository
+  copy:
+    src: google-chrome.repo
+    dest: /etc/yum.repos.d/google-chrome.repo
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Paper Gnome Theme repository
+  copy:
+    src: home_snwh_paper.repo
+    dest: /etc/yum.repos.d/home_snwh_paper.repo
+    owner: root
+    group: root
+    mode: 0644

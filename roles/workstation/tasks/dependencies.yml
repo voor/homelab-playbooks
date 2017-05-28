@@ -1,0 +1,9 @@
+- name: Install Ansible Python 2 Dependencies
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - python-firewall
+    - libselinux-python
+    - libsemanage-python
+    - wireless-tools
