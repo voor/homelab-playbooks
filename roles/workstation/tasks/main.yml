@@ -8,11 +8,6 @@
                (updates_available.rc != 100)
   changed_when: false
 
-- name: upgrade all packages
-  dnf:
-    name: "*"
-    state: latest
-
 - include: dependencies.yml
 - include: codecs.yml
 - include: repo.yml
