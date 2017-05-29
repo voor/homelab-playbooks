@@ -1,4 +1,8 @@
-- name: Install codecs
-  command: dnf install -y gstreamer{1,}-{ffmpeg,libav,plugins-{good,ugly,bad{,-free,-nonfree}}} --setopt=strict=0
-  args:
-    warn: no
+- name: Install gstreamer codecs
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - gstreamer1-plugins-bad
+    - gstreamer1-plugins-good
+    - ffmpeg

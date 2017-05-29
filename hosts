@@ -1,2 +1,5 @@
 [nfs-server]
-storage.planetvoor.com
+#storage.planetvoor.com
+
+[workstation]
+localhost

@@ -6,3 +6,10 @@
 
   roles:
     - nfs-server
+
+- name: Set Up Workstation
+  hosts: workstation
+  remote_user: voor
+
+  roles:
+    - workstation

@@ -1,4 +1,4 @@
-----
+---
 - name: Update Package List
   command: dnf --refresh check-update
   args:
