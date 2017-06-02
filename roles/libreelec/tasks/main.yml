@@ -1,0 +1,19 @@
+- name: Copy mount file.
+  template:
+    src: storage-mnt.mount.j2
+    dest: /storage/.config/system.d/storage-mnt.mount
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - mount all
+
+- name: Copy advanced settings file.
+  template:
+    src: advancedsettings.xml.j2
+    dest: /storage/.kodi/userdata/advancedsettings.xml
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart kodi

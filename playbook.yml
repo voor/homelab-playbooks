@@ -13,3 +13,10 @@
 
   roles:
     - workstation
+
+- name: Set Up LibreELEC
+  hosts: libreelec
+  remote_user: root
+
+  roles:
+    - libreelec

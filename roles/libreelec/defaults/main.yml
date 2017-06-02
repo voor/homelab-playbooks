@@ -1,0 +1,4 @@
+nfs_what: "storage.planetvoor.com:/storage/mnt"
+nfs_where: "/storage/mnt"
+nfs_options: "rsize=32768,wsize=32768,timeo=14,soft"
+mysql_hostname: "rs.planetvoor.com"

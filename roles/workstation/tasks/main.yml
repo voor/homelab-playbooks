@@ -11,3 +11,4 @@
 - include: dependencies.yml
 - include: codecs.yml
 - include: repo.yml
+- include: nfs.yml

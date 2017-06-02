@@ -1,0 +1,10 @@
+---
+- name: mount all
+  command: mount -a
+  args:
+    warn: no
+
+- name: restart kodi
+  service:
+    name: kodi
+    state: restarted
