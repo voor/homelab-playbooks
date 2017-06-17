@@ -17,3 +17,38 @@
     mode: 0644
   notify:
     - restart kodi
+
+- name: Generate Diffie–Hellman primes
+  command: openssl dhparam -out /storage/.kodi/userdata/addon_data/docker.linuxserver.nginx/config/keys/dhparam.pem 4096
+  args:
+    creates: /storage/.kodi/userdata/addon_data/docker.linuxserver.nginx/config/keys/dhparam.pem
+
+- name: Copy default http-https redirect
+  template:
+    src: default.j2
+    dest: /storage/.kodi/userdata/addon_data/docker.linuxserver.nginx/config/nginx/site-confs/default
+    owner: nobody
+    group: users
+    mode: 0664
+  notify:
+    - restart nginx
+
+
+
+- name: Copy proxy server
+  template:
+    src: proxy.j2
+    dest: /storage/.kodi/userdata/addon_data/docker.linuxserver.nginx/config/nginx/site-confs/proxy
+    owner: nobody
+    group: users
+    mode: 0664
+  notify:
+    - restart nginx
+
+- name: Add port 9090 to nginx container
+  lineinfile:
+    path: /storage/.kodi/addons/docker.linuxserver.nginx/bin/docker.linuxserver.nginx
+    regexp: '^\s-p "$P_port":80'
+    line: '-p "$P_port":80 -p 9090:9090 \'
+  notify:
+    - restart nginx

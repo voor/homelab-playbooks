@@ -8,3 +8,8 @@
   service:
     name: kodi
     state: restarted
+
+- name: restart nginx
+  service:
+    name: docker.linuxserver.nginx.service
+    state: restarted
