@@ -1,3 +1,4 @@
 playbook.retry
 **.key
 **.crt
+hosts

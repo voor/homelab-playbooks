@@ -27,13 +27,28 @@
   template:
     src: default.j2
     dest: /storage/.kodi/userdata/addon_data/docker.linuxserver.nginx/config/nginx/site-confs/default
-    owner: nobody
-    group: users
-    mode: 0664
+    owner: root
+    group: root
+    mode: 0644
   notify:
     - restart nginx
 
+- name: Change permissions on keys folder.
+  file:
+    path: /storage/.kodi/userdata/addon_data/docker.linuxserver.nginx/config/keys
+    owner: root
+    group: root
+    mode: 0755
 
+- name: Change permissions on certificates.
+  file:
+    path: '/storage/.kodi/userdata/addon_data/docker.linuxserver.nginx/config/keys/{{ item }}'
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - 'cert.crt'
+    - 'cert.key'
 
 - name: Copy proxy server
   template:
