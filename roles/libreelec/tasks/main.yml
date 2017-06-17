@@ -30,8 +30,6 @@
     owner: root
     group: root
     mode: 0644
-  notify:
-    - restart nginx
 
 - name: Change permissions on keys folder.
   file:
@@ -57,13 +55,14 @@
     owner: nobody
     group: users
     mode: 0664
-  notify:
-    - restart nginx
 
 - name: Add port 9090 to nginx container
   lineinfile:
     path: /storage/.kodi/addons/docker.linuxserver.nginx/bin/docker.linuxserver.nginx
-    regexp: '^\s-p "$P_port":80'
-    line: '-p "$P_port":80 -p 9090:9090 \'
-  notify:
-    - restart nginx
+    regexp: '_port":80'
+    line: '           -p "$P_port":80 \'
+
+- name: Start nginx
+  service:
+    name: docker.linuxserver.nginx.service
+    state: restarted
