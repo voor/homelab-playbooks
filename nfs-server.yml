@@ -1,0 +1,9 @@
+#!/usr/bin/env ansible-playbook
+---
+- name: Set Up NFS Server
+  hosts: nfs-server
+  remote_user: suser
+
+  roles:
+    - common
+    - nfs-server

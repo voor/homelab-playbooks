@@ -1,0 +1,70 @@
+---
+- name: Install Ansible Python 2 Dependencies
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - python-firewall
+    - libselinux-python
+    - libsemanage-python
+    - epel-release
+    - certbot
+    - nginx
+
+- name: Copy well-known configuration
+  copy:
+    src: letsencrypt-well-known.conf
+    dest: /etc/nginx/default.d/letsencrypt-well-known.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Copy SSL Redirect configuration
+  copy:
+    src: ssl-redirect.conf
+    dest: /etc/nginx/default.d/ssl-redirect.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Set SSL Configuration
+  template:
+   src: ssl.conf.j2
+   dest: /etc/nginx/conf.d/ssl.conf
+   owner: root
+   group: root
+   mode: 0644
+
+- name: Generate Diffie–Hellman primes
+  command: openssl dhparam -out /etc/ssl/certs/dhparam.pem 4096
+  args:
+    creates: /etc/ssl/certs/dhparam.pem
+
+- name: Allow HTTP over firewall.
+  firewalld:
+    service: http
+    permanent: true
+    state: enabled
+    immediate: yes
+
+- name: Allow HTTPS over firewall.
+  firewalld:
+    service: https
+    permanent: true
+    state: enabled
+    immediate: yes
+
+- cron:
+    name: certbot renew
+    weekday: 2
+    minute: 0
+    hour: 12
+    user: root
+    job: "/usr/bin/certbot renew --renew-hook '/usr/bin/systemctl reload nginx' >> /var/log/letsencrypt-renew.log"
+    cron_file: ansible_cerbot-renew
+
+- name: Start Nginx Service
+  service:
+    name: nginx
+    state: started
+    enabled: yes

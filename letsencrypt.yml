@@ -1,0 +1,11 @@
+#!/usr/bin/env ansible-playbook
+---
+- name: Set Up Lets Encrypt Proxy
+  hosts: letsencrypt
+  remote_user: voor
+  become: yes
+  become_method: sudo
+
+  roles:
+    - common
+    - letsencrypt

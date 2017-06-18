@@ -1,0 +1,9 @@
+#!/usr/bin/env ansible-playbook
+---
+- name: Set Up OSMC
+  hosts: osmc
+  remote_user: osmc
+
+  roles:
+    - common
+    - osmc

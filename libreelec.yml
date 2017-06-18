@@ -1,0 +1,9 @@
+#!/usr/bin/env ansible-playbook
+---
+- name: Set Up LibreELEC
+  hosts: libreelec
+  remote_user: root
+
+  roles:
+    - common
+    - libreelec
