@@ -1,7 +1,7 @@
 server {
         listen 443 http2 ssl;
 
-        server_name {{domain_names}};
+        server_name {{domain_names | join(' ') }};
 
         ssl_certificate /etc/letsencrypt/live/{{main_domain}}/fullchain.pem;
         ssl_certificate_key /etc/letsencrypt/live/{{main_domain}}/privkey.pem;
