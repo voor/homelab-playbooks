@@ -1,2 +1,2 @@
-main-domain: planetvoor.com
-domain_names: "{{main-domain}} www.planetvoor.com certbot.planetvoor.com cps.planetvoor.com deluge.planetvoor.com gr.planetvoor.com gym.planetvoor.com mb.planetvoor.com mylar.planetvoor.com router.planetvoor.com rs.planetvoor.com sab.planetvoor.com scanner.planetvoor.com sr.planetvoor.com storage.planetvoor.com unifi.planetvoor.com"
+main_domain: planetvoor.com
+domain_names: "{{main_domain}} www.planetvoor.com certbot.planetvoor.com cps.planetvoor.com deluge.planetvoor.com gr.planetvoor.com gym.planetvoor.com mb.planetvoor.com mylar.planetvoor.com router.planetvoor.com rs.planetvoor.com sab.planetvoor.com scanner.planetvoor.com sr.planetvoor.com storage.planetvoor.com unifi.planetvoor.com"

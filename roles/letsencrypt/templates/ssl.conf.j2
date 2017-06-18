@@ -3,8 +3,8 @@ server {
 
         server_name {{domain_names}};
 
-        ssl_certificate /etc/letsencrypt/live/{{main-domain}}/fullchain.pem;
-        ssl_certificate_key /etc/letsencrypt/live/{{main-domain}}/privkey.pem;
+        ssl_certificate /etc/letsencrypt/live/{{main_domain}}/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/{{main_domain}}/privkey.pem;
 
         ########################################################################
         # from https://cipherli.st/                                            #
