@@ -1,8 +1,7 @@
-main_domain: planetvoor.com
+main_domain: www.planetvoor.com
 my_email: rcvanvo@gmail.com
 domain_names:
   - "{{main_domain}}"
-  - "www.planetvoor.com"
   - "certbot.planetvoor.com"
   - "cps.planetvoor.com"
   - "deluge.planetvoor.com"
