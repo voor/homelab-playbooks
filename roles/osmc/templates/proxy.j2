@@ -1,7 +1,7 @@
-ssl_certificate  /config/keys/cert.crt;
-ssl_certificate_key  /config/keys/cert.key;
+ssl_certificate  /etc/ssl/certs/private/cert.crt;
+ssl_certificate_key  /etc/ssl/certs/private/cert.key;
 
-ssl_dhparam /config/keys/dhparam.pem;
+ssl_dhparam /etc/ssl/certs/dhparam.pem;
 
 ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 ssl_prefer_server_ciphers on;
@@ -24,7 +24,7 @@ server  {
   server_name _;
   ssl on;
   location  / {
-    proxy_pass http://{{docker_host_address}}:8080/;
+    proxy_pass http://127.0.0.1:8080/;
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-for $proxy_add_x_forwarded_for;
     proxy_set_header Host $host;
@@ -38,11 +38,11 @@ server  {
 }
 
 server  {
-  listen 9080 ssl;
+  listen 9090 ssl;
   server_name _;
   ssl on;
   location  / {
-    proxy_pass http://{{docker_host_address}}:8080/;
+    proxy_pass http://127.0.0.1:8080/;
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-for $proxy_add_x_forwarded_for;
     proxy_set_header Host $host;

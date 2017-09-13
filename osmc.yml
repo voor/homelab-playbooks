@@ -3,6 +3,7 @@
 - name: Set Up OSMC
   hosts: osmc
   remote_user: osmc
+  become: true
 
   roles:
     - common

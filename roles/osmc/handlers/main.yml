@@ -4,11 +4,6 @@
   args:
     warn: no
 
-- name: restart kodi
-  service:
-    name: kodi
-    state: restarted
-
 - name: restart nginx
   service:
     name: nginx

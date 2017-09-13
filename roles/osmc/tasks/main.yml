@@ -1,7 +1,7 @@
 - name: Copy mount file.
   template:
     src: storage-mnt.mount.j2
-    dest: /storage/.config/system.d/storage-mnt.mount
+    dest: /etc/systemd/system/storage-mnt.mount
     owner: root
     group: root
     mode: 0644
@@ -11,58 +11,38 @@
 - name: Copy advanced settings file.
   template:
     src: advancedsettings.xml.j2
-    dest: /storage/.kodi/userdata/advancedsettings.xml
+    dest: /home/osmc/.kodi/userdata/advancedsettings.xml
     owner: root
     group: root
     mode: 0644
-  notify:
-    - restart kodi
+
+- name: Ensure nginx utilities is installed.
+  package:
+    name: nginx
+    state: installed
 
 - name: Generate Diffie–Hellman primes
-  command: openssl dhparam -out /storage/.kodi/userdata/addon_data/docker.linuxserver.nginx/config/keys/dhparam.pem 4096
+  command: openssl dhparam -out /etc/ssl/certs/dhparam.pem 4096
   args:
-    creates: /storage/.kodi/userdata/addon_data/docker.linuxserver.nginx/config/keys/dhparam.pem
+    creates: /etc/ssl/certs/dhparam.pem
 
 - name: Copy default http-https redirect
   template:
     src: default.j2
-    dest: /storage/.kodi/userdata/addon_data/docker.linuxserver.nginx/config/nginx/site-confs/default
+    dest: /etc/nginx/sites-enabled/default
     owner: root
     group: root
     mode: 0644
 
-- name: Change permissions on keys folder.
-  file:
-    path: /storage/.kodi/userdata/addon_data/docker.linuxserver.nginx/config/keys
-    owner: root
-    group: root
-    mode: 0755
-
-- name: Change permissions on certificates.
-  file:
-    path: '/storage/.kodi/userdata/addon_data/docker.linuxserver.nginx/config/keys/{{ item }}'
-    owner: root
-    group: root
-    mode: 0644
-  with_items:
-    - 'cert.crt'
-    - 'cert.key'
-
-- name: Copy proxy server
+- name: Copy proxy
   template:
     src: proxy.j2
-    dest: /storage/.kodi/userdata/addon_data/docker.linuxserver.nginx/config/nginx/site-confs/proxy
-    owner: nobody
-    group: users
-    mode: 0664
-
-- name: Add port 9090 to nginx container
-  lineinfile:
-    path: /storage/.kodi/addons/docker.linuxserver.nginx/bin/docker.linuxserver.nginx
-    regexp: '_port":80'
-    line: '           -p "$P_port":80 -p 9080:9080 \'
+    dest: /etc/nginx/sites-enabled/proxy
+    owner: root
+    group: root
+    mode: 0644
 
 - name: Start nginx
   service:
-    name: docker.linuxserver.nginx.service
+    name: nginx
     state: restarted
