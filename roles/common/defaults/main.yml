@@ -3,3 +3,5 @@ nfs_where: "/storage/mnt"
 nfs_options: "rsize=32768,wsize=32768,timeo=14,soft"
 mysql_hostname: "rs.planetvoor.com"
 docker_host_address: 172.17.0.1
+nfs_mount_regex: "^storage.planetvoor.com"
+nfs_mount: "storage.planetvoor.com:/storage/mnt /storage/mnt                  nfs    defaults     0 0"

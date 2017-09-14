@@ -1,12 +1,4 @@
-- name: Copy mount file.
-  template:
-    src: storage-mnt.mount.j2
-    dest: /etc/systemd/system/storage-mnt.mount
-    owner: root
-    group: root
-    mode: 0644
-  notify:
-    - mount all
+- include: nfs.yml
 
 - name: Copy advanced settings file.
   template:
