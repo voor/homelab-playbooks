@@ -3,6 +3,7 @@
 - name: Set Up NFS Server
   hosts: nfs-server
   remote_user: suser
+  become: true
 
   roles:
     - common
