@@ -72,3 +72,14 @@
     name: nginx
     state: started
     enabled: yes
+
+- name: Fetch latest secure keys
+  fetch:
+    src: "/etc/letsencrypt/live/www.planetvoor.com/{{item}}"
+    dest: .secrets/
+    flat: yes
+  with_items:
+    - cert.pem
+    - chain.pem
+    - fullchain.pem
+    - privkey.pem
