@@ -34,6 +34,30 @@
     group: root
     mode: 0644
 
+- name: Make sure private directory exists
+  file:
+    state: directory
+    path: /etc/ssl/certs/private/
+    owner: root
+    group: root
+    mode: 0775
+
+- name: Copy latest certificate
+  copy:
+    src: ./.secrets/fullchain.pem
+    dest: /etc/ssl/certs/private/cert.crt
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Copy latest private keys
+  copy:
+    src: ./.secrets/privkey.pem
+    dest: /etc/ssl/certs/private/cert.key
+    owner: root
+    group: root
+    mode: 0644
+
 - name: Start nginx
   service:
     name: nginx
