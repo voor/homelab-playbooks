@@ -11,3 +11,48 @@
   package:
     name: nfs-utils
     state: installed
+
+- name: Make sure nginx is installed
+  package:
+    name: nginx
+    state: present
+
+- name: nginx proxy configurations
+  template:
+    src: "{{ item }}"
+    dest: "/etc/nginx/conf.d/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - kodi.conf
+    - media.conf
+
+- name: Make sure private directory exists
+  file:
+    state: directory
+    path: /etc/ssl/certs/private/
+    owner: root
+    group: root
+    mode: 0775
+
+- name: Copy latest certificate
+  copy:
+    src: ./.secrets/fullchain.pem
+    dest: /etc/ssl/certs/private/cert.crt
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Copy latest private keys
+  copy:
+    src: ./.secrets/privkey.pem
+    dest: /etc/ssl/certs/private/cert.key
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Start nginx
+  service:
+    name: nginx
+    state: restarted

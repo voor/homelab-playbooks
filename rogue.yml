@@ -1,0 +1,10 @@
+#!/usr/bin/env ansible-playbook
+---
+- name: Set Up OSMC
+  hosts: rogue
+  remote_user: ruser
+  become: true
+
+  roles:
+    - common
+    - rogue
