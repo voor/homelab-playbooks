@@ -7,3 +7,18 @@
     - libselinux-python
     - libsemanage-python
     - wireless-tools
+
+- name: NodeJS Development Environment
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - nodejs
+    - jq
+
+- name: Remove PackageKit
+  package:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - PackageKit
