@@ -1,0 +1,21 @@
+- name: Download IntelliJ 2017.2.5
+  get_url:
+    url: https://download.jetbrains.com/idea/ideaIU-2017.2.5.tar.gz
+    dest: /tmp/ideaIU-2017.2.5.tar.gz
+    checksum: sha256:a08ff0adfad2e8008d42e92d09696e43a70566b544db6c6f872e5b4d20436d2c
+
+- name: Unarchive IntelliJ 2017.2.5
+  unarchive:
+    src: /tmp/ideaIU-2017.2.5.tar.gz
+    dest: /home/voor/idea
+    group: voor
+    owner: voor
+    remote_src: yes
+
+- name: Google Chrome repository
+  copy:
+    src: update-atom.sh
+    dest: /home/voor/bin/update-atom
+    owner: voor
+    group: voor
+    mode: 0755
