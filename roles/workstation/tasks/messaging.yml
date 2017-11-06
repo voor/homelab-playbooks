@@ -14,9 +14,9 @@
 - name: Make sure icon directory exists
   file:
     state: directory
-    path: /home/{{username}}/.icon
-    owner: {{username}}
-    group: {{username}}
+    path: "/home/{{username}}/.icon"
+    owner: "{{username}}"
+    group: "{{username}}"
     mode: 0775
 
 - name: Google Hangouts Icon

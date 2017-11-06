@@ -1,15 +1,15 @@
-- name: Download IntelliJ {{intellij_version}}
+- name: "Download IntelliJ {{intellij_version}}"
   get_url:
-    url: https://download.jetbrains.com/idea/ideaIU-{{intellij_version}}.tar.gz
-    dest: /tmp/ideaIU-{{intellij_version}}.tar.gz
+    url: "https://download.jetbrains.com/idea/ideaIU-{{intellij_version}}.tar.gz"
+    dest: "/tmp/ideaIU-{{intellij_version}}.tar.gz"
     checksum: sha256:a08ff0adfad2e8008d42e92d09696e43a70566b544db6c6f872e5b4d20436d2c
 
-- name: Unarchive IntelliJ {{intellij_version}}
+- name: "Unarchive IntelliJ {{intellij_version}}"
   unarchive:
-    src: /tmp/ideaIU-{{intellij_version}}.tar.gz
-    dest: /home/{{username}}/idea
-    group: {{username}}
-    owner: {{username}}
+    src: "/tmp/ideaIU-{{intellij_version}}.tar.gz"
+    dest: "/home/{{username}}/idea"
+    group: "{{username}}"
+    owner: "{{username}}"
     remote_src: yes
 
 - name: Download Postman
@@ -20,9 +20,9 @@
 - name: Unarchive Postman
   unarchive:
     src: /tmp/Postman.tar.gz
-    dest: /home/{{username}}/
-    group: {{username}}
-    owner: {{username}}
+    dest: "/home/{{username}}/"
+    group: "{{username}}"
+    owner: "{{username}}"
     remote_src: yes
 
 - name: Download Google Cloud Platform CLI 177.0.0
@@ -34,7 +34,7 @@
 - name: Install Google Cloud Platform CLI 177.0.0
   command: /tmp/google-cloud-sdk/install.sh --quiet --usage-reporting no --command-completion yes
   become: true
-  become_user: {{username}}
+  become_user: "{{username}}"
 
 - name: Install Genymotion
   get_url:
@@ -45,36 +45,36 @@
 - name: Move atom update script onto machine.
   copy:
     src: update-atom.sh
-    dest: /home/{{username}}/bin/update-atom
-    owner: {{username}}
-    group: {{username}}
+    dest: "/home/{{username}}/bin/update-atom"
+    owner: "{{username}}"
+    group: "{{username}}"
     mode: 0755
 
 - name: Install Atom
-  command: /home/{{username}}/bin/update-atom
+  command:" /home/{{username}}/bin/update-atom"
 
 - name: Make sure global npm directory exists
   file:
     state: directory
-    path: /home/{{username}}/.npm-global
-    owner: {{username}}
-    group: {{username}}
+    path: "/home/{{username}}/.npm-global"
+    owner: "{{username}}"
+    group: "{{username}}"
     mode: 0775
 
 - name: Set global environment
   command: npm config set prefix '~/.npm-global'
   become: true
-  become_user: {{username}}
+  become_user: "{{username}}"
 
 - name: Install yarn
   command: curl -o- -L https://yarnpkg.com/install.sh | bash
   become: true
-  become_user: {{username}}
+  become_user: "{{username}}"
 
 - name: Install Atom plugins
-  command: apm install {{item}}
+  command: "apm install {{item}}"
   become: true
-  become_user: {{username}}
+  become_user: "{{username}}"
   with_items:
     - asciidoc-preview
     - atom-material-ui
