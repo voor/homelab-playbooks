@@ -1,4 +1,5 @@
-- lineinfile:
+- name: Home network mount.
+  lineinfile:
     path: /etc/fstab
     regexp: "{{nfs_mount_regex}}"
     line: "{{nfs_mount}}"

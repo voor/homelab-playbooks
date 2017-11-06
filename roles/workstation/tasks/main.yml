@@ -14,3 +14,4 @@
 - include: messaging.yml
 - include: nfs.yml
 - include: gnome.yml
+- include: ide.yml
