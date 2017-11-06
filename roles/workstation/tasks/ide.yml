@@ -4,14 +4,6 @@
     dest: "/tmp/ideaIU-{{intellij_version}}.tar.gz"
     checksum: sha256:a08ff0adfad2e8008d42e92d09696e43a70566b544db6c6f872e5b4d20436d2c
 
-- name: "Unarchive IntelliJ {{intellij_version}}"
-  unarchive:
-    src: "/tmp/ideaIU-{{intellij_version}}.tar.gz"
-    dest: "/home/{{username}}/idea"
-    group: "{{username}}"
-    owner: "{{username}}"
-    remote_src: yes
-
 - name: Download Postman
   get_url:
     url: https://dl.pstmn.io/download/latest/linux64
