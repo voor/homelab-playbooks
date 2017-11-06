@@ -8,6 +8,22 @@
     - libsemanage-python
     - wireless-tools
 
+- name: Google Chrome repository
+  copy:
+    src: google-chrome.repo
+    dest: /etc/yum.repos.d/google-chrome.repo
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Paper Gnome Theme repository
+  copy:
+    src: home_snwh_paper.repo
+    dest: /etc/yum.repos.d/home_snwh_paper.repo
+    owner: root
+    group: root
+    mode: 0644
+
 - name: Development Environment
   package:
     name: "{{ item }}"
