@@ -1,13 +1,13 @@
 
-- name: Change Theme to Numix
-  command: "gsettings set {{ item }} gtk-theme \"Numix\""
-  become: true
-  become_user: "{{username}}"
-  with_items:
-    - org.gnome.desktop.interface gtk-theme
-    - org.gnome.desktop.interface icon-theme
-    - org.gnome.desktop.interface cursor-theme
-    - org.gnome.desktop.wm.preferences theme
+# - name: Change Theme to Numix
+#   command: "gsettings set {{ item }} gtk-theme \"Numix\""
+#   become: true
+#   become_user: "{{username}}"
+#   with_items:
+#     - org.gnome.desktop.interface gtk-theme
+#     - org.gnome.desktop.interface icon-theme
+#     - org.gnome.desktop.interface cursor-theme
+#     - org.gnome.desktop.wm.preferences theme
 #
 # - name: Enable Gnome Extensions
 #   command: "gnome-shell-extension-tool -e {{ item }}"
