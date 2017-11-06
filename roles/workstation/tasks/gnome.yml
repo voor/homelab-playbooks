@@ -1,10 +1,6 @@
-- name: Audio Output Switcher
-  git:
-    repo: https://github.com/voor/audio-output-switcher.git
-    dest: /home/{{username}}/.local/share/gnome-shell/extensions/audio-output-switcher@anduchs
 
-- name: Change Theme to Paper
-  command: "gsettings set {{ item }} gtk-theme \"Paper\""
+- name: Change Theme to Numix
+  command: "gsettings set {{ item }} gtk-theme \"Numix\""
   become: true
   become_user: "{{username}}"
   with_items:
@@ -12,15 +8,15 @@
     - org.gnome.desktop.interface icon-theme
     - org.gnome.desktop.interface cursor-theme
     - org.gnome.desktop.wm.preferences theme
-
-- name: Enable Gnome Extensions
-  command: "gnome-shell-extension-tool -e {{ item }}"
-  become: true
-  become_user: "{{username}}"
-  with_items:
-    - audio-output-switcher.git
-    - audio-input-switcher.git
-    - gnome-shell-extension-stealmyfocus
-    - multi-monitors-add-on
-    - TopIcons@phocean.net
-    - pixel-saver@deadalnix.me
+#
+# - name: Enable Gnome Extensions
+#   command: "gnome-shell-extension-tool -e {{ item }}"
+#   become: true
+#   become_user: "{{username}}"
+#   with_items:
+#     - audio-output-switcher.git
+#     - audio-input-switcher.git
+#     - gnome-shell-extension-stealmyfocus
+#     - multi-monitors-add-on
+#     - TopIcons@phocean.net
+#     - pixel-saver@deadalnix.me
