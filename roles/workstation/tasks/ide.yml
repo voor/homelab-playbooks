@@ -74,11 +74,6 @@
   become: true
   become_user: "{{username}}"
 
-- name: Install yarn
-  command: curl -o- -L https://yarnpkg.com/install.sh | bash
-  become: true
-  become_user: "{{username}}"
-
 - name: Install Atom plugins
   command: "apm install {{item}}"
   become: true
