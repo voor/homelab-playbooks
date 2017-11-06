@@ -37,7 +37,8 @@
     - paper-icon-theme
     - paper-gtk-theme
     - xorg-x11-utils
-    - akmod-VirtualBox VirtualBox
+    - akmod-VirtualBox
+    - VirtualBox
 
 - name: Remove PackageKit
   package:
