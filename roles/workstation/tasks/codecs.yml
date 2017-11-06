@@ -3,6 +3,6 @@
     name: "{{ item }}"
     state: present
   with_items:
-    - gstreamer1-plugins-bad
+    - gstreamer1-plugins-bad-nonfree
     - gstreamer1-plugins-good
     - ffmpeg
