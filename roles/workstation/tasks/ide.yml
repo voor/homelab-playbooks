@@ -26,7 +26,7 @@
 - name: Unarchive Google Cloud Platform CLI 177.0.0
   unarchive:
     src: /tmp/google-cloud-sdk-177.0.0-linux-x86_64.tar.gz
-    dest: "/tmp/google-cloud-sdk-177.0.0-linux-x86_64"
+    dest: /tmp/
     group: "{{username}}"
     owner: "{{username}}"
     remote_src: yes
