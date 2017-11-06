@@ -1,0 +1,20 @@
+- name: Slack Desktop App
+  package:
+    name: https://downloads.slack-edge.com/linux_releases/slack-2.6.2-0.1.fc21.x86_64.rpm
+    state: present
+
+- name: Google Hangouts Gnome Link
+  copy:
+    src: "hangouts/Chrome Hangouts.desktop"
+    dest: "/home/{{ user }}/.local/share/applications/Chrome Hangouts.desktop"
+    owner: {{ user }}
+    group: {{ user }}
+    mode: 0755
+
+- name: Google Hangouts Icon
+  copy:
+    src: hangouts/Hangouts_Icon.png
+    dest: /home/{{ user }}/.icon/Hangouts_Icon.png
+    owner: {{ user }}
+    group: {{ user }}
+    mode: 0644

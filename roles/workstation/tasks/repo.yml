@@ -21,11 +21,6 @@
     - http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_current }}.noarch.rpm
     - http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_current }}.noarch.rpm
 
-- name: Slack Desktop App
-  package:
-    name: https://downloads.slack-edge.com/linux_releases/slack-2.6.2-0.1.fc21.x86_64.rpm
-    state: present
-
 - name: Google Chrome repository
   copy:
     src: google-chrome.repo

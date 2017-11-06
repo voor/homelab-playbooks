@@ -8,13 +8,20 @@
     - libsemanage-python
     - wireless-tools
 
-- name: NodeJS Development Environment
+- name: Development Environment
   package:
     name: "{{ item }}"
     state: present
   with_items:
     - nodejs
     - jq
+    - kubernetes-client
+    - google-chrome-beta
+    - gnome-tweak-tool
+    - paper-icon-theme
+    - paper-gtk-theme
+    - xorg-x11-utils
+    - akmod-VirtualBox VirtualBox
 
 - name: Remove PackageKit
   package:

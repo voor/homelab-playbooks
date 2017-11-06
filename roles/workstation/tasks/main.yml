@@ -8,7 +8,9 @@
                (updates_available.rc != 100)
   changed_when: false
 
+- include: repo.yml
 - include: dependencies.yml
 - include: codecs.yml
-- include: repo.yml
+- include: messaging.yml
 - include: nfs.yml
+- include: gnome.yml

@@ -1,21 +1,104 @@
-- name: Download IntelliJ 2017.2.5
+- name: Download IntelliJ {{intellij_version}}
   get_url:
-    url: https://download.jetbrains.com/idea/ideaIU-2017.2.5.tar.gz
-    dest: /tmp/ideaIU-2017.2.5.tar.gz
+    url: https://download.jetbrains.com/idea/ideaIU-{{intellij_version}}.tar.gz
+    dest: /tmp/ideaIU-{{intellij_version}}.tar.gz
     checksum: sha256:a08ff0adfad2e8008d42e92d09696e43a70566b544db6c6f872e5b4d20436d2c
 
-- name: Unarchive IntelliJ 2017.2.5
+- name: Unarchive IntelliJ {{intellij_version}}
   unarchive:
-    src: /tmp/ideaIU-2017.2.5.tar.gz
-    dest: /home/voor/idea
-    group: voor
-    owner: voor
+    src: /tmp/ideaIU-{{intellij_version}}.tar.gz
+    dest: /home/{{username}}/idea
+    group: {{username}}
+    owner: {{username}}
     remote_src: yes
 
-- name: Google Chrome repository
+- name: Download Postman
+  get_url:
+    url: https://dl.pstmn.io/download/latest/linux64
+    desk: /tmp/Postman.tar.gz
+
+- name: Unarchive Postman
+  unarchive:
+    src: /tmp/Postman.tar.gz
+    dest: /home/{{username}}/
+    group: {{username}}
+    owner: {{username}}
+    remote_src: yes
+
+- name: Download Google Cloud Platform CLI 177.0.0
+  get_url:
+    url: https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-177.0.0-linux-x86_64.tar.gz
+    dest: /tmp/google-cloud-sdk-177.0.0-linux-x86_64.tar.gz
+    checksum: sha256:ac62ffc3c1836b0055f89ec5ac3b38323b53a759f444ce0b8a9aba182efa6acf
+
+- name: Install Google Cloud Platform CLI 177.0.0
+  command: /tmp/google-cloud-sdk/install.sh --quiet --usage-reporting no --command-completion yes
+  become: true
+  become_user: {{username}}
+
+- name: Install Genymotion
+  get_url:
+    url: https://dl.genymotion.com/releases/genymotion-2.11.0/genymotion-2.11.0-linux_x64.bin
+    dest: /tmp/genymotion-2.11.0-linux_x64.bin
+    checksum: 1e46e078996332c25c7bf65c7467e715ffa30389
+
+- name: Move atom update script onto machine.
   copy:
     src: update-atom.sh
-    dest: /home/voor/bin/update-atom
-    owner: voor
-    group: voor
+    dest: /home/{{username}}/bin/update-atom
+    owner: {{username}}
+    group: {{username}}
     mode: 0755
+
+- name: Install Atom
+  command: /home/{{username}}/bin/update-atom
+
+- name: Make sure global npm directory exists
+  file:
+    state: directory
+    path: /home/{{username}}/.npm-global
+    owner: {{username}}
+    group: {{username}}
+    mode: 0775
+
+- name: Set global environment
+  command: npm config set prefix '~/.npm-global'
+  become: true
+  become_user: {{username}}
+
+- name: Install yarn
+  command: curl -o- -L https://yarnpkg.com/install.sh | bash
+  become: true
+  become_user: {{username}}
+
+- name: Install Atom plugins
+  command: apm install {{item}}
+  become: true
+  become_user: {{username}}
+  with_items:
+    - asciidoc-preview
+    - atom-material-ui
+    - atom-beautify
+    - autocomplete-js-import
+    - busy-signal
+    - color-picker
+    - docblockr
+    - fonts
+    - intentions
+    - jumpy
+    - language-asciidoc
+    - language-babel
+    - language-docker
+    - language-groovy
+    - language-kickstart
+    - language-protobuf
+    - language-rpm-spec
+    - linter
+    - linter-eslint
+    - linter-ui-default
+    - pigments
+    - project-manager
+    - react-es6-snippets
+    - react-redux-snippets
+    - sort-lines
+    - split-diff
