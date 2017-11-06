@@ -51,7 +51,7 @@
     mode: 0755
 
 - name: Install Atom
-  command:" /home/{{username}}/bin/update-atom"
+  command: "/home/{{username}}/bin/update-atom"
 
 - name: Make sure global npm directory exists
   file:
