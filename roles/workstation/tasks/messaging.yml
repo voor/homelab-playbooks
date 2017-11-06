@@ -11,6 +11,14 @@
     group: "{{ username }}"
     mode: 0755
 
+- name: Make sure icon directory exists
+  file:
+    state: directory
+    path: /home/{{username}}/.icon
+    owner: {{username}}
+    group: {{username}}
+    mode: 0775
+
 - name: Google Hangouts Icon
   copy:
     src: hangouts/Hangouts_Icon.png
