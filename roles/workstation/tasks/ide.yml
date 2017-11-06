@@ -6,8 +6,8 @@
 
 - name: Download Postman
   get_url:
-    url: https://dl.pstmn.io/download/latest/linux64
-    desk: /tmp/Postman.tar.gz
+    url: "https://dl.pstmn.io/download/latest/linux64"
+    dest: /tmp/Postman.tar.gz
 
 - name: Unarchive Postman
   unarchive:
