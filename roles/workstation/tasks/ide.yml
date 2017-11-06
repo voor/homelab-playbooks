@@ -40,7 +40,7 @@
   get_url:
     url: https://dl.genymotion.com/releases/genymotion-2.11.0/genymotion-2.11.0-linux_x64.bin
     dest: /tmp/genymotion-2.11.0-linux_x64.bin
-    checksum: sha256:1e46e078996332c25c7bf65c7467e715ffa30389
+    checksum: sha256:0ec695f5fd8a41b6fb306bd5e1088722cc0e17c0a8b174dabd9598f24225cfbc
 
 - name: Move atom update script onto machine.
   copy:
