@@ -24,6 +24,15 @@
     group: root
     mode: 0644
 
+- name: Update Package List
+  command: dnf --refresh check-update
+  args:
+    warn: no
+  register: updates_available
+  failed_when: (updates_available.rc != 0) and
+               (updates_available.rc != 100)
+  changed_when: false
+  
 - name: Development Environment
   package:
     name: "{{ item }}"
