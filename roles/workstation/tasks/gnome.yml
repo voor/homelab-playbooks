@@ -4,9 +4,9 @@
     dest: /home/{{username}}/.local/share/gnome-shell/extensions/audio-output-switcher@anduchs
 
 - name: Change Theme to Paper
-  command: gsettings set {{ item }} gtk-theme "Paper"
+  command: "gsettings set {{ item }} gtk-theme \"Paper\""
   become: true
-  become_user: {{username}}
+  become_user: "{{username}}"
   with_items:
     - org.gnome.desktop.interface gtk-theme
     - org.gnome.desktop.interface icon-theme
@@ -14,9 +14,9 @@
     - org.gnome.desktop.wm.preferences theme
 
 - name: Enable Gnome Extensions
-  command: gnome-shell-extension-tool -e {{ item }}
+  command: "gnome-shell-extension-tool -e {{ item }}"
   become: true
-  become_user: {{username}}
+  become_user: "{{username}}"
   with_items:
     - audio-output-switcher.git
     - audio-input-switcher.git
