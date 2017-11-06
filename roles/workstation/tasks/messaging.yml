@@ -7,14 +7,14 @@
   copy:
     src: "hangouts/Chrome Hangouts.desktop"
     dest: "/home/{{ username }}/.local/share/applications/Chrome Hangouts.desktop"
-    owner: {{ username }}
-    group: {{ username }}
+    owner: "{{ username }}"
+    group: "{{ username }}"
     mode: 0755
 
 - name: Google Hangouts Icon
   copy:
     src: hangouts/Hangouts_Icon.png
-    dest: /home/{{ username }}/.icon/Hangouts_Icon.png
-    owner: {{ username }}
-    group: {{ username }}
+    dest: "/home/{{ username }}/.icon/Hangouts_Icon.png"
+    owner: "{{ username }}"
+    group: "{{ username }}"
     mode: 0644
