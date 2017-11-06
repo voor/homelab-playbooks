@@ -23,8 +23,16 @@
     dest: /tmp/google-cloud-sdk-177.0.0-linux-x86_64.tar.gz
     checksum: sha256:ac62ffc3c1836b0055f89ec5ac3b38323b53a759f444ce0b8a9aba182efa6acf
 
+- name: Unarchive Google Cloud Platform CLI 177.0.0
+  unarchive:
+    src: /tmp/google-cloud-sdk-177.0.0-linux-x86_64.tar.gz
+    dest: "/tmp/google-cloud-sdk-177.0.0-linux-x86_64"
+    group: "{{username}}"
+    owner: "{{username}}"
+    remote_src: yes
+
 - name: Install Google Cloud Platform CLI 177.0.0
-  command: /tmp/google-cloud-sdk/install.sh --quiet --usage-reporting no --command-completion yes
+  command: /tmp/google-cloud-sdk-177.0.0-linux-x86_64/google-cloud-sdk/install.sh --quiet --usage-reporting no --command-completion yes
   become: true
   become_user: "{{username}}"
 
