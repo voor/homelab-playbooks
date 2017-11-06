@@ -42,6 +42,14 @@
     dest: /tmp/genymotion-2.11.0-linux_x64.bin
     checksum: sha256:0ec695f5fd8a41b6fb306bd5e1088722cc0e17c0a8b174dabd9598f24225cfbc
 
+- name: Make sure bin directory exists
+  file:
+    state: directory
+    path: "/home/{{username}}/bin"
+    owner: "{{username}}"
+    group: "{{username}}"
+    mode: 0775
+
 - name: Move atom update script onto machine.
   copy:
     src: update-atom.sh
