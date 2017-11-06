@@ -32,7 +32,7 @@
     remote_src: yes
 
 - name: Install Google Cloud Platform CLI 177.0.0
-  command: /tmp/google-cloud-sdk-177.0.0-linux-x86_64/google-cloud-sdk/install.sh --quiet --usage-reporting no --command-completion yes
+  command: /tmp/google-cloud-sdk/install.sh --quiet --usage-reporting no --command-completion yes
   become: true
   become_user: "{{username}}"
 
