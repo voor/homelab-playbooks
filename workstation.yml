@@ -1,0 +1,10 @@
+#!/usr/bin/env ansible-playbook
+---
+- name: Set Up Workstation
+  hosts: workstation
+  remote_user: voor
+  become: true
+
+  roles:
+    - common
+    - workstation
