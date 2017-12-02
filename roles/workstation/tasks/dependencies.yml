@@ -38,6 +38,8 @@
     - numix-gtk-theme
     - akmod-VirtualBox
     - VirtualBox
+    - zlib-devel.i686
+    - ncurses-devel.i686
 
 - name: Remove PackageKit
   package:

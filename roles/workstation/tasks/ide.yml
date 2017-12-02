@@ -1,3 +1,11 @@
+- name: File notifiers
+  copy:
+    src: 50-inotify.conf
+    dest: /etc/sysctl.d/50-inotify.conf
+    owner: root
+    group: root
+    mode: 0644
+
 - name: "Download IntelliJ {{intellij_version}}"
   get_url:
     url: "https://download.jetbrains.com/idea/ideaIU-{{intellij_version}}.tar.gz"
