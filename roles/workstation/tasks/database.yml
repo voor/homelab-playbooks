@@ -1,0 +1,49 @@
+---
+- name: Install MariaDB package
+  package:
+    name: mariadb-server
+    state: latest
+
+- name: Install MariaDB Python package
+  package:
+    name: python2-mysql
+    state: latest
+
+- name: Start MariaDB Service
+  service:
+    name: mariadb
+    state: started
+    enabled: yes
+
+- name: Set root user password
+  # If .my.cnf already exists, this will cause an mysql-root-password update.
+  mysql_user:
+    name: root
+    password: "{{ mysql_root_password }}"
+    check_implicit_admin: true
+
+- name: Create .my.cnf
+  template:
+   src: client.my.cnf.j2
+   dest: "/home/{{username}}/.my.cnf"
+   owner: "{{username}}"
+   group: "{{username}}"
+   mode: 0600
+
+- name: Remove anonymous user
+  mysql_user:
+    name: ''
+    state: absent
+
+- name: set max_allowed_packet
+  mysql_variables:
+    variable: max_allowed_packet
+    value: 167772160
+
+- name: MariaDB max connections
+  copy:
+    src: "mariadb_max_connections.cnf"
+    dest: "/etc/my.cnf.d"
+    owner: root
+    group: root
+    mode: 0644
