@@ -55,7 +55,7 @@
     immediate: yes
 
 - name: Run certbot at least once
-  command: certbot certonly --agree-tos -m {{my_email}} -n -a webroot --webroot-path=/usr/share/nginx/html -d {{ domain_names | join(' -d ') }}
+  command: certbot certonly --expand --agree-tos -m {{my_email}} -n -a webroot --webroot-path=/usr/share/nginx/html -d {{ domain_names | join(' -d ') }}
 
 - name: Set up autorenew
   cron:
