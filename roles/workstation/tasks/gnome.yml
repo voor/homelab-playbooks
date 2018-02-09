@@ -20,3 +20,10 @@
 #     - multi-monitors-add-on
 #     - TopIcons@phocean.net
 #     - pixel-saver@deadalnix.me
+
+- name: Meld dark theme colors
+  copy:
+    src: .gtkrc-2.0
+    dest: "/home/{{username}}/"
+    group: "{{username}}"
+    owner: "{{username}}"
