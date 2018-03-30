@@ -8,14 +8,6 @@
     - libsemanage-python
     - wireless-tools
 
-- name: Google Chrome repository
-  copy:
-    src: google-chrome.repo
-    dest: /etc/yum.repos.d/google-chrome.repo
-    owner: root
-    group: root
-    mode: 0644
-
 - name: Update Package List
   command: dnf --refresh check-update
   args:
@@ -36,10 +28,32 @@
     - google-chrome-beta
     - gnome-tweak-tool
     - numix-gtk-theme
+    - numix-icon-theme
     - akmod-VirtualBox
     - VirtualBox
     - zlib-devel.i686
     - ncurses-devel.i686
+    - zsh
+    - git-gui
+    - docker
+
+- name: Start Docker Service
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Create dummy .zshrc file
+  file: 
+    name: "/home/{{username}}/.zshrc"
+    state: touch
+    owner: "{{username}}"
+    group: "{{username}}"
+
+- name: Change to zsh
+  user:
+    shell: /usr/bin/zsh
+    name: "{{username}}"
 
 - name: Remove PackageKit
   package:
@@ -47,3 +61,8 @@
     state: absent
   with_items:
     - PackageKit
+
+- name: Adding existing user '{{ username }}' to group docker and vboxusers
+  user: name='{{ username }}'
+        groups=docker,vboxusers
+        append=yes

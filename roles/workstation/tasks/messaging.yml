@@ -26,8 +26,3 @@
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0644
-
-- name: Skype for Business Client
-  package:
-    name: sky
-    state: present
