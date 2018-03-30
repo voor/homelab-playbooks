@@ -36,6 +36,7 @@
     - zsh
     - git-gui
     - docker
+    - meld
 
 - name: Start Docker Service
   service:
@@ -61,6 +62,11 @@
     state: absent
   with_items:
     - PackageKit
+
+- name: Ensure group "docker" existsr
+  group:
+    name: docker
+    state: present
 
 - name: Adding existing user '{{ username }}' to group docker and vboxusers
   user: name='{{ username }}'
