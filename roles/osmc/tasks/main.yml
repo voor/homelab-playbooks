@@ -8,6 +8,12 @@
     group: root
     mode: 0644
 
+- name: ll alias
+  lineinfile:
+    path: /etc/bash.bashrc
+    regexp: '^alias ll="ls -l"'
+    line: 'alias ll="ls -l"'
+
 - name: Ensure nginx utilities is installed.
   package:
     name: nginx
