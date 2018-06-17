@@ -37,7 +37,7 @@
 
 - name: Move server into internal zone.
   firewalld:
-    zone: trusted
+    zone: internal
     interface: enp10s0f1
     permanent: true
     state: enabled
