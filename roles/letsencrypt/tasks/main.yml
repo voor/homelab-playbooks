@@ -54,7 +54,7 @@
     state: enabled
     immediate: yes
 
-e name: Run certbot at least once
+- name: Run certbot at least once
   command: certbot certonly --force-renew --expand --agree-tos -m {{my_email}} -n -a webroot --webroot-path=/usr/share/nginx/html -d {{ domain_names | join(' -d ') }}
 
 - name: Set up autorenew
