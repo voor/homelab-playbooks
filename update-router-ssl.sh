@@ -2,6 +2,8 @@
 
 set -e
 
+rm .secrets/unifi.keystore.jks
+
 # Concat together both private keys.
 cat .secrets/privkey.pem .secrets/cert.pem > .secrets/server.pem
 # Send it over to the server.
