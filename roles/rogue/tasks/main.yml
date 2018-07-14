@@ -62,4 +62,16 @@
 - name: Start nginx
   service:
     name: nginx
-    state: restarted
+    state: started
+    enabled: yes
+
+- name: Install PowerPanel CyperPower UPS
+  package:
+    name: https://dl4jz3rbrsfum.cloudfront.net/software/powerpanel-132-0x86_64.rpm
+    state: installed
+
+- name: PowerPanel service is enabled
+  service:
+    name: pwrstatd
+    state: started
+    enabled: yes
