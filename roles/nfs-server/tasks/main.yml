@@ -83,6 +83,13 @@
     mode: 0644
   notify:
     - restart nfs
+    
+- lineinfile:
+    path: /etc/fstab
+    regexp: "^RPCNFSDCOUNT="
+    line: "RPCNFSDCOUNT=16"
+  notify:
+    - restart nfs
 
 - name: Ensure nfs is running.
   service:
