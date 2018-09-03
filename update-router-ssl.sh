@@ -2,12 +2,14 @@
 
 set -e
 
-rm .secrets/unifi.keystore.jks
+rm .secrets/unifi.keystore.jks || :
 
 # Concat together both private keys.
 cat .secrets/privkey.pem .secrets/cert.pem > .secrets/server.pem
 # Send it over to the server.
-scp .secrets/server.pem voor@router.planetvoor.com:/etc/lighttpd/server.pem
+scp .secrets/server.pem voor@router.planetvoor.com:~
+ssh voor@router.planetvoor.com 'sudo su -c "mv /home/voor/server.pem /etc/lighttpd/server.pem"'
+ssh voor@router.planetvoor.com 'sudo su -c "chown root:root /etc/lighttpd/server.pem"'
 
 openssl pkcs12 -export -in .secrets/fullchain.pem -inkey .secrets/privkey.pem -certfile .secrets/cert.pem -out .secrets/unifi.p12 -name unifi -password pass:aircontrolenterprise
 
@@ -28,7 +30,9 @@ scp .secrets/cert.tar root@unifi.planetvoor.com:/etc/ssl/private
 
 # Do this on the router:
 # kill -SIGINT $(cat /var/run/lighttpd.pid)
+ssh voor@router.planetvoor.com 'sudo su -c "kill -SIGINT $(cat /var/run/lighttpd.pid)"'
 # /usr/sbin/lighttpd -f /etc/lighttpd/lighttpd.conf
+ssh voor@router.planetvoor.com 'sudo su -c "/usr/sbin/lighttpd -f /etc/lighttpd/lighttpd.conf"'
 
 # Do this on the cloud key:
 # cd /etc/ssl/private/
