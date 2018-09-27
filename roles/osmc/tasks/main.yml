@@ -1,4 +1,4 @@
-- include: nfs.yml
+- include_tasks: nfs.yml
 
 - name: Copy advanced settings file.
   template:

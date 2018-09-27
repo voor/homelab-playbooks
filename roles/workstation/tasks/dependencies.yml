@@ -1,7 +1,7 @@
 - name: Install Ansible Python 2 Dependencies
   package:
     name: "{{ item }}"
-    state: present
+    state: installed
   with_items:
     - python-firewall
     - libselinux-python
@@ -20,7 +20,7 @@
 - name: Development Environment
   package:
     name: "{{ item }}"
-    state: present
+    state: installed
   with_items:
     - nodejs
     - jq

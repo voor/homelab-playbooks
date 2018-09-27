@@ -1,7 +1,7 @@
 - name: Install gstreamer codecs
   package:
     name: "{{ item }}"
-    state: present
+    state: installed
   with_items:
     - gstreamer1-plugins-bad-nonfree
     - gstreamer1-plugins-good
