@@ -1,0 +1,4 @@
+- name: Ensure python is installed.
+  package:
+    name: python
+    state: installed

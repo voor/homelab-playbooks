@@ -1,0 +1,10 @@
+#!/usr/bin/env ansible-playbook
+---
+- name: Set Up dashboard
+  hosts: dash
+  remote_user: pi
+  become: true
+
+  roles:
+    - common
+    - dash
