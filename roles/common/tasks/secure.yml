@@ -1,0 +1,82 @@
+- name: Set Hostname
+  hostname:
+    name: "{{ system_hostname }}"
+  notify: Delete Chrome Singleton
+
+- name: Set Timezone
+  timezone:
+    name: "{{ timezone }}"
+
+- name: Change user password
+  user:
+    name: "{{ server_user_name }}"
+    password: "{{ server_user_password }}"
+    shell: /bin/bash
+    state: present
+    update_password: always
+
+- name: Add group to sudoers
+  copy:
+    dest: /etc/sudoers.d/user-nopasswd
+    content: "{{server_user_name}} ALL=(ALL) NOPASSWD:ALL"
+    force: yes
+    group: root
+    owner: root
+    mode: 0440
+    follow: yes
+
+- name: Add authorized_keys for the user
+  authorized_key:
+    user: "{{ server_user_name }}"
+    state: present
+    key: https://github.com/voor.keys
+
+- name: Add other authorized_keys for the user
+  authorized_key:
+    user: "{{ server_user_name }}"
+    state: present
+    key: "{{ item }}"
+  with_file:
+    - public_keys/juicessh.pub
+    - public_keys/ruser.pub
+
+- name: Disable root SSH access
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^PermitRootLogin"
+    line: "PermitRootLogin no"
+    state: present
+  notify: Restart ssh
+
+- name: Disable password authentication
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^PasswordAuthentication"
+    line: "PasswordAuthentication no"
+    state: present
+  notify: Restart ssh
+
+# - name: Make sure firewall tools are installed.
+#   package:
+#     name: "{{ item }}"
+#     state: present
+#   with_items:
+#     - python-firewall
+#     - firewalld
+
+# - name: Allow services over firewall.
+#   firewalld:
+#     service: "{{ item }}"
+#     permanent: true
+#     state: enabled
+#     zone: internal
+#     immediate: yes
+#   with_items:
+#     - ssh
+
+# - name: Move server into internal zone.
+#   firewalld:
+#     zone: internal
+#     interface: "{{eth_interface}}"
+#     permanent: true
+#     state: enabled

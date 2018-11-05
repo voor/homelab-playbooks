@@ -6,3 +6,8 @@ docker_host_address: 172.17.0.1
 nfs_mount_regex: "^storage.planetvoor.com"
 nfs_mount: "storage.planetvoor.com:/storage/mnt /storage/mnt                  nfs    defaults     0 0"
 ro_nfs_mount: "storage.planetvoor.com:/storage/mnt /storage/mnt nfs ro,noatime,rsize=32768,wsize=32768,nolock,nfsvers=3 0 0"
+timezone: "America/New_York"
+ufw_allowed_ports:
+  - 22
+  - 80
+  - 443

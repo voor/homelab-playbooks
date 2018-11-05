@@ -1,4 +1,66 @@
-- name: Ensure python is installed.
+- name: HDMI force hotplug
+  lineinfile:
+    dest: /boot/config.txt
+    regexp: "hdmi_force_hotplug"
+    line: "hdmi_force_hotplug=1"
+    state: present
+  notify: Reboot
+
+- name: HDMI normal mode
+  lineinfile:
+    dest: /boot/config.txt
+    regexp: "hdmi_drive"
+    line: "#hdmi_drive=2"
+    state: present
+  notify: Reboot
+
+- name: HDMI group
+  lineinfile:
+    dest: /boot/config.txt
+    regexp: "hdmi_group"
+    line: "hdmi_group=2"
+    state: present
+  notify: Reboot
+
+- name: HDMI mode FullHD
+  lineinfile:
+    dest: /boot/config.txt
+    regexp: "hdmi_mode"
+    line: "hdmi_mode=82"
+    state: present
+  notify: Reboot
+
+- name: Install packages
   package:
-    name: python
-    state: installed
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - unclutter
+    - ttf-mscorefonts-installer
+    - lightdm
+    - lxde
+  notify: Restart lightdm
+
+- name: Make sure LXDE config directory exists.
+  file:
+    path: "/home/{{ autostart_user }}/.config/lxsession/LXDE-pi/"
+    state: directory
+
+- name: Create LXDE autostart configuration
+  template:
+    src: "templates/autostart.j2"
+    dest: "/home/{{ autostart_user }}/.config/lxsession/LXDE-pi/autostart"
+  notify: Restart lightdm
+
+- name: Make sure lightdm directory exists
+  file:
+    path: "/etc/lightdm/"
+    state: directory
+
+- name: Disable lightdm screensaver
+  lineinfile:
+    dest: /etc/lightdm/lightdm.conf
+    regexp: "xserver-command="
+    line: "xserver-command=X -s 0 -dpms"
+    state: present
+  notify: Restart lightdm

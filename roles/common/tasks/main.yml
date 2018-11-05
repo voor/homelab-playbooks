@@ -1,0 +1,7 @@
+- name: ll alias
+  lineinfile:
+    path: /etc/bash.bashrc
+    regexp: '^alias ll="ls -l"'
+    line: 'alias ll="ls -l"'
+
+- include_tasks: secure.yml
