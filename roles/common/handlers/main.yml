@@ -3,7 +3,3 @@
     name: ssh
     state: restarted
 
-- name: Delete Chrome Singleton
-  file:
-    path: "/home/{{ autostart_user }}/.config/chromium/Singleton*"
-    state: absent
