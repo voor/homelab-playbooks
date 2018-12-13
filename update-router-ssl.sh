@@ -1,6 +1,4 @@
-#!/usr/bin/env sh
-
-set -e
+#!/bin/bash -exu
 
 rm .secrets/unifi.keystore.jks || :
 
