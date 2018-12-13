@@ -24,7 +24,7 @@
   with_items:
     - nodejs
     - jq
-    - kubernetes-client
+    - kubectl
     - google-chrome-beta
     - gnome-tweak-tool
     - numix-gtk-theme
@@ -35,7 +35,7 @@
     - ncurses-devel.i686
     - zsh
     - git-gui
-    - docker
+    - docker-ce
     - meld
 
 - name: Start Docker Service

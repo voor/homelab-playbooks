@@ -35,6 +35,14 @@
     gpgkey: https://dl.google.com/linux/linux_signing_key.pub
     gpgcheck: yes
 
+- name: Add Kubernetes Repository
+  yum_repository:
+    name: kubernetes
+    baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+    gpgkey: https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+    gpgcheck: yes
+    repo_gpgcheck: yes
+
 - name: RPM Fusion Free and Non-Free
   package:
     name: "{{ item }}"
