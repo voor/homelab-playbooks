@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
-sudo dnf -y groupinstall gnome-desktop base-x -x PackageKit,PackageKit-command-not-found
+sudo dnf -y groupinstall hardware-support gnome-desktop base-x -x PackageKit,PackageKit-command-not-found
 sudo dnf install -y gnome-tweak-tool
+
+sudo dnf systemctl set-default graphical.target
+sudo dnf systemctl enable --now gdm
 
 # Popular Gnome Extensions that improve the environment
 mkdir -p ~/.local/share/gnome-shell/extensions/
