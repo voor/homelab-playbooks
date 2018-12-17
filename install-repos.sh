@@ -19,7 +19,7 @@ sudo cp -r yum.repos.d/* /etc/yum.repos.d/
 sudo dnf config-manager --set-enabled rpmfusion-nonfree-steam
 
 sudo dnf upgrade --refresh -y
-sudo dnf install -y google-chrome-beta VirtualBox kernel-devel kernel-headers
+sudo dnf install -y google-chrome-beta kernel-devel kernel-headers
 
 sudo dnf install -y gstreamer{1,}-{ffmpeg,libav,plugins-{good,ugly,bad{,-free,-nonfree}}} --setopt=strict=0
 

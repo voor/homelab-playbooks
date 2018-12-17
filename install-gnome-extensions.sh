@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+sudo dnf -y groupinstall gnome-desktop base-x -x PackageKit,PackageKit-command-not-found
+sudo dnf install -y gnome-tweak-tool
+
 # Popular Gnome Extensions that improve the environment
 mkdir -p ~/.local/share/gnome-shell/extensions/
 git clone https://github.com/voor/audio-output-switcher.git ~/.local/share/gnome-shell/extensions/audio-output-switcher@anduchs && \
