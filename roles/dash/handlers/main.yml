@@ -6,6 +6,7 @@
 
 - name: Restart lightdm
   service:
+    enabled: true
     name: lightdm
     state: restarted
 

@@ -39,18 +39,45 @@
     - ttf-mscorefonts-installer
     - lightdm
     - lxde
+    - accountsservice
   notify: Restart lightdm
+
+- name: lightdm on boot
+  service:
+    enabled: true
+    name: lightdm
+    state: started
 
 - name: Make sure LXDE config directory exists.
   file:
     path: "/home/{{ autostart_user }}/.config/lxsession/LXDE-pi/"
+    owner: "{{ autostart_user }}"
+    group: "{{ autostart_user }}"
     state: directory
 
 - name: Create LXDE autostart configuration
   template:
     src: "templates/autostart.j2"
-    dest: "/home/{{ autostart_user }}/.config/lxsession/LXDE-pi/autostart"
+    dest: "/etc/xdg/lxsession/LXDE/autostart"
+    owner: "root"
+    group: "root"
   notify: Restart lightdm
+
+- name: Create LXDE autostart configuration
+  template:
+    src: "templates/autostart.j2"
+    dest: "/home/{{ autostart_user }}/.config/lxsession/LXDE-pi/autostart"
+    owner: "{{ autostart_user }}"
+    group: "{{ autostart_user }}"
+  notify: Restart lightdm
+
+- name: Make sure config directory has correct permissions.
+  file:
+    path: "/home/{{ autostart_user }}/.config"
+    owner: "{{ autostart_user }}"
+    group: "{{ autostart_user }}"
+    recurse: "yes"
+    state: directory
 
 - name: Make sure lightdm directory exists
   file:
@@ -62,5 +89,21 @@
     dest: /etc/lightdm/lightdm.conf
     regexp: "xserver-command="
     line: "xserver-command=X -s 0 -dpms"
+    state: present
+  notify: Restart lightdm
+
+- name: Turn on lightdm autologin-user-timeout
+  lineinfile:
+    dest: /etc/lightdm/lightdm.conf
+    regexp: "autologin-user-timeout="
+    line: "autologin-user-timeout=0"
+    state: present
+  notify: Restart lightdm
+
+- name: Turn on lightdm autologin-user
+  lineinfile:
+    dest: /etc/lightdm/lightdm.conf
+    regexp: "autologin-user="
+    line: "autologin-user=pi"
     state: present
   notify: Restart lightdm
