@@ -1,5 +1,5 @@
 ---
 dns_domain_name: planetvoor.com
-nfs_exports: [ "/storage/mnt 192.168.2.0/255.255.255.0(rw,no_subtree_check,async,fsid=0)" ]
+nfs_exports: [ "/storage/mnt 192.168.2.0/255.255.255.0(rw,no_subtree_check,async,fsid=0,all_squash,anonuid=1000,anongid=1000)" ]
 nfs_server_user: nobody
 network_subnet: 192.168.2.0/255.255.255.0
