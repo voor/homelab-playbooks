@@ -33,9 +33,7 @@ ssh voor@router.planetvoor.com 'sudo su -c "kill -SIGINT $(cat /var/run/lighttpd
 ssh voor@router.planetvoor.com 'sudo su -c "/usr/sbin/lighttpd -f /etc/lighttpd/lighttpd.conf"'
 
 # Do this on the cloud key:
-# cd /etc/ssl/private/
-# tar xf cert.tar
-# chown root:ssl-cert cloudkey.crt cloudkey.key unifi.keystore.jks cert.tar
-# chmod 640 cloudkey.crt cloudkey.key unifi.keystore.jks cert.tar
-# nginx -t
-# /etc/init.d/nginx restart; /etc/init.d/unifi restart
+ssh root@unifi.planetvoor.com 'tar xf /etc/ssl/private/cert.tar -C /etc/ssl/private/ \
+  && chown root:ssl-cert /etc/ssl/private/cloudkey.crt /etc/ssl/private/cloudkey.key /etc/ssl/private/unifi.keystore.jks /etc/ssl/private/cert.tar \
+  && chmod 640 /etc/ssl/private/cloudkey.crt /etc/ssl/private/cloudkey.key /etc/ssl/private/unifi.keystore.jks /etc/ssl/private/cert.tar \
+  && nginx -t && /etc/init.d/nginx restart && /etc/init.d/unifi restart'
