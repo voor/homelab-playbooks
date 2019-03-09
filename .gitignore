@@ -4,4 +4,4 @@ playbook.retry
 **.crt
 hosts
 hosts.yml
-.secrets/
+/.secrets
