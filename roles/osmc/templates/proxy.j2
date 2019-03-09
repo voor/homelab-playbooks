@@ -17,6 +17,8 @@ ssl_stapling_verify on;
 add_header Strict-Transport-Security "max-age=63072000; includeSubdomains";
 add_header X-Content-Type-Options nosniff;
 
+client_max_body_size 16M;
+
 upstream kodi {
   server    127.0.0.1:8080;
   keepalive 512;
