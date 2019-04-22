@@ -1,7 +1,6 @@
 - name: Set Hostname
   hostname:
     name: "{{ system_hostname }}"
-  notify: Delete Chrome Singleton
 
 - name: Set Timezone
   timezone:
