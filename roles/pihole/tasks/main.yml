@@ -18,6 +18,7 @@
   copy:
     dest: /etc/dnsmasq.d/02-lan.conf
     content: "addn-hosts=/etc/pihole/lan.list"
+    decrypt: yes
     force: yes
     group: root
     owner: root
