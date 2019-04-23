@@ -3,3 +3,23 @@
     path: /etc/bash.bashrc
     regexp: '^alias ll="ls -l"'
     line: 'alias ll="ls -l"'
+
+- name: Add hosts
+  copy:
+    dest: /etc/pihole/lan.list
+    src: lan.list
+    force: yes
+    group: root
+    owner: root
+    mode: 0644
+    follow: yes
+
+- name: Add hosts config
+  copy:
+    dest: /etc/dnsmasq.d/02-lan.conf
+    content: "addn-hosts=/etc/pihole/lan.list"
+    force: yes
+    group: root
+    owner: root
+    mode: 0644
+    follow: yes
