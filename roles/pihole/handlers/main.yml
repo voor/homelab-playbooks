@@ -1,0 +1,2 @@
+- name: Restart DNS
+  command: /usr/local/bin/pihole restartdns

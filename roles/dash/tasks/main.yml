@@ -107,3 +107,8 @@
     line: "autologin-user=pi"
     state: present
   notify: Restart lightdm
+
+- name: Delete Chrome Singleton
+  file:
+    path: "/home/{{ autostart_user }}/.config/chromium/Singleton*"
+    state: absent

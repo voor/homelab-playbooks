@@ -13,6 +13,7 @@
     owner: root
     mode: 0644
     follow: yes
+  notify: Restart DNS
 
 - name: Add hosts config
   copy:
@@ -24,3 +25,4 @@
     owner: root
     mode: 0644
     follow: yes
+  notify: Restart DNS
