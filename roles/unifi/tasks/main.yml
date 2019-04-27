@@ -35,10 +35,9 @@
     passphrase: aircontrolenterprise
     privatekey_path: "{{cert_privkey}}"
     certificate_path: "{{cert_fullchain}}"
-    owner: "{{ lookup('env','UID') }}"
-    group: "{{ lookup('env','GID') }}"
     mode: 0644
     state: present
+  become: false
 
 - name: Copy latest p12 cert
   copy:
