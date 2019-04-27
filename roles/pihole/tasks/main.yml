@@ -4,6 +4,66 @@
     regexp: '^alias ll="ls -l"'
     line: 'alias ll="ls -l"'
 
+- name: Disable WIFI and Bluetooth
+  copy:
+    dest: /etc/modprobe.d/raspi-blacklist.conf
+    src: raspi-blacklist.conf
+    group: root
+    owner: root
+    mode: 0600
+  notify: Reboot system
+
+- name: Run update
+  apt:
+    update_cache: yes
+
+- name: Run dist upgrade
+  apt:
+    upgrade: dist
+
+- name: Remove dependencies that are no longer required
+  apt:
+    autoremove: yes
+
+- name: Remove useless packages from the cache
+  apt:
+    autoclean: yes
+
+- name: Create pihole user
+  user:
+    name: pihole
+    comment: "DNS pihole account"
+    uid: 999
+    groups: pihole,www-data
+    system: True
+    shell: /usr/sbin/nologin
+
+- name: Download Pi-Hole installer
+  get_url:
+    url: https://install.pi-hole.net
+    dest: ~/install-pihole.sh
+    mode: 0740
+
+- name: Create pihole configuration directory
+  file:
+    name: /etc/pihole/
+    state: directory
+    owner: pihole
+    group: pihole
+    mode: 0755
+
+- name: Create pihole configuration
+  become: True
+  template:
+    src: "setupVars.conf.j2"
+    dest: "/etc/pihole/setupVars.conf"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Install Pi-Hole
+  shell: "~/install-pihole.sh --unattended"
+
 - name: Add hosts
   copy:
     dest: /etc/pihole/lan.list
