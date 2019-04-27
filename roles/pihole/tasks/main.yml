@@ -29,6 +29,12 @@
   apt:
     autoclean: yes
 
+- name: Ensure group "pihole" exists
+  group:
+    name: pihole
+    system: True
+    state: present
+
 - name: Create pihole user
   user:
     name: pihole
