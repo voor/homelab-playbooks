@@ -1,0 +1,58 @@
+- name: Make sure private directory exists
+  file:
+    state: directory
+    path: /etc/ssl/certs/private/
+    owner: root
+    group: ssl-cert
+    mode: 0770
+
+- name: Copy latest certificate
+  copy:
+    src: "{{cert_fullchain}}"
+    dest: /etc/ssl/certs/private/cert.crt
+    owner: root
+    group: ssl-cert
+    mode: 0644
+  notify:
+    - restart nginx
+
+- name: Copy latest private keys
+  copy:
+    src: "{{cert_privkey}}"
+    dest: /etc/ssl/certs/private/cert.key
+    owner: root
+    group: ssl-cert
+    mode: 0640
+  notify:
+    - restart nginx
+
+- name: Generate PKCS#12 file
+  openssl_pkcs12:
+    action: export
+    path: "/etc/ssl/private/unifi.p12"
+    friendly_name: "unifi"
+    passphrase: aircontrolenterprise
+    privatekey_path: /etc/ssl/certs/private/cert.key
+    certificate_path: /etc/ssl/certs/private/cert.crt
+    owner: root
+    group: ssl-cert
+    mode: 0640
+    state: present
+
+- name: Make sure SSL keystore has correct permissions
+  file:
+    path: /etc/ssl/private/unifi.keystore.jks
+    owner: root
+    group: ssl-cert
+    mode: 0640
+
+- name: Import SSL into keystore
+  java_cert:
+    pkcs12_path: /etc/ssl/private/unifi.p12
+    cert_alias: unifi
+    keystore_path: /etc/ssl/private/unifi.keystore.jks
+    keystore_pass: aircontrolenterprise
+    keystore_create: yes
+    state: present
+  notify:
+    - restart unifi

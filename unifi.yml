@@ -1,0 +1,9 @@
+#!/usr/bin/env ansible-playbook
+---
+- name: Set Up Unifi Controller
+  hosts: unifi
+  remote_user: root
+  become: true
+
+  roles:
+    - unifi
