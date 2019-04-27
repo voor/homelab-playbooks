@@ -27,17 +27,23 @@
     - restart nginx
 
 - name: Generate PKCS#12 file
-  openssl_pkcs12:
+  local_action:
+    module: openssl_pkcs12
     action: export
-    path: "/etc/ssl/private/unifi.p12"
+    path: "{{cert_p12}}"
     friendly_name: "unifi"
     passphrase: aircontrolenterprise
-    privatekey_path: /etc/ssl/certs/private/cert.key
-    certificate_path: /etc/ssl/certs/private/cert.crt
+    privatekey_path: "{{cert_privkey}}"
+    certificate_path: "{{cert_fullchain}}"
+    state: present
+
+- name: Copy latest private keys
+  copy:
+    src: "{{cert_privkey}}"
+    dest: /etc/ssl/certs/private/cert.key
     owner: root
     group: ssl-cert
     mode: 0640
-    state: present
 
 - name: Make sure SSL keystore has correct permissions
   file:
