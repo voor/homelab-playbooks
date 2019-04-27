@@ -35,6 +35,12 @@
     system: True
     state: present
 
+- name: Ensure group "www-data" exists
+  group:
+    name: www-data
+    system: True
+    state: present
+
 - name: Create pihole user
   user:
     name: pihole
