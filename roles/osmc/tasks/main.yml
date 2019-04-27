@@ -17,7 +17,7 @@
 - name: Ensure nginx utilities is installed.
   package:
     name: nginx
-    state: installed
+    state: present
 
 - name: Generate Diffie–Hellman primes
   command: openssl dhparam -out /etc/ssl/certs/dhparam.pem 4096
@@ -31,6 +31,7 @@
     owner: root
     group: root
     mode: 0644
+  notify: restart nginx
 
 - name: Copy proxy
   template:
@@ -39,6 +40,7 @@
     owner: root
     group: root
     mode: 0644
+  notify: restart nginx
 
 - name: Make sure private directory exists
   file:
@@ -55,6 +57,7 @@
     owner: root
     group: root
     mode: 0644
+  notify: restart nginx
 
 - name: Copy latest private keys
   copy:
@@ -63,8 +66,4 @@
     owner: root
     group: root
     mode: 0644
-
-- name: Start nginx
-  service:
-    name: nginx
-    state: restarted
+  notify: restart nginx
