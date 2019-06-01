@@ -1,0 +1,9 @@
+#!/usr/bin/env ansible-playbook
+---
+- name: Common tasks
+  hosts: common
+  remote_user: pi
+  become: true
+
+  roles:
+    - common

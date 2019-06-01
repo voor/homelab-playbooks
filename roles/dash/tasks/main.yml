@@ -55,6 +55,13 @@
     group: "{{ autostart_user }}"
     state: directory
 
+- name: Make sure LXDE config directory exists.
+  file:
+    path: "/home/{{ autostart_user }}/.config/lxsession/LXDE/"
+    owner: "{{ autostart_user }}"
+    group: "{{ autostart_user }}"
+    state: directory
+
 - name: Create LXDE autostart configuration
   template:
     src: "templates/autostart.j2"
@@ -67,6 +74,14 @@
   template:
     src: "templates/autostart.j2"
     dest: "/home/{{ autostart_user }}/.config/lxsession/LXDE-pi/autostart"
+    owner: "{{ autostart_user }}"
+    group: "{{ autostart_user }}"
+  notify: Restart lightdm
+
+- name: Create LXDE autostart configuration
+  template:
+    src: "templates/autostart.j2"
+    dest: "/home/{{ autostart_user }}/.config/lxsession/LXDE/autostart"
     owner: "{{ autostart_user }}"
     group: "{{ autostart_user }}"
   notify: Restart lightdm

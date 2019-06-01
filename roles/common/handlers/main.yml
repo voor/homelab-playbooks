@@ -3,3 +3,5 @@
     name: ssh
     state: restarted
 
+- name: Reboot system
+  reboot:
