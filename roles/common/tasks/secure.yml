@@ -67,18 +67,26 @@
 - name: Run update
   apt:
     update_cache: yes
+  environment:
+    PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:{{ ansible_env.PATH }}"
 
 - name: Run dist upgrade
   apt:
     upgrade: dist
+  environment:
+    PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:{{ ansible_env.PATH }}"
 
 - name: Remove dependencies that are no longer required
   apt:
     autoremove: yes
+  environment:
+    PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:{{ ansible_env.PATH }}"
 
 - name: Remove useless packages from the cache
   apt:
     autoclean: yes
+  environment:
+    PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:{{ ansible_env.PATH }}"
 
 # - name: Make sure firewall tools are installed.
 #   package:
