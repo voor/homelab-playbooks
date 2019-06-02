@@ -14,6 +14,12 @@
     regexp: '^alias ll="ls -l"'
     line: 'alias ll="ls -l"'
 
+- name: osmc remote enter key
+  lineinfile:
+    path: /etc/lirc/osmc-remote-lircd.conf
+    regexp: '^\s+KEY_.*0x14$'
+    line: '          KEY_ENTER                0x14'
+
 - name: Ensure nginx utilities is installed.
   package:
     name: nginx
