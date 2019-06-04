@@ -23,6 +23,7 @@
   get_url:
     url: https://install.pi-hole.net
     dest: ~/install-pihole.sh
+    force: yes
     mode: 0740
 
 - name: Create pihole configuration directory
