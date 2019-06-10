@@ -55,6 +55,17 @@
     group: ssl-cert
     mode: 0640
 
+
+- name: Remove SSL from keystore
+  java_cert:
+    pkcs12_path: /etc/ssl/private/unifi.p12
+    cert_alias: unifi
+    keystore_path: /etc/ssl/private/unifi.keystore.jks
+    keystore_pass: aircontrolenterprise
+    keystore_create: yes
+    state: absent
+
+
 - name: Import SSL into keystore
   java_cert:
     pkcs12_path: /etc/ssl/private/unifi.p12
