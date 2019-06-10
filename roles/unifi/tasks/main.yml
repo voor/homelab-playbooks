@@ -42,11 +42,13 @@
 - name: Copy latest p12 cert
   copy:
     src: "{{cert_p12}}"
-    dest: /etc/ssl/certs/private/unifi.p12
+    dest: /etc/ssl/private/unifi.p12
     force: yes
     owner: root
     group: ssl-cert
     mode: 0640
+  notify:
+    - remove ssl
 
 - name: Make sure SSL keystore has correct permissions
   file:
@@ -54,17 +56,6 @@
     owner: root
     group: ssl-cert
     mode: 0640
-
-
-- name: Remove SSL from keystore
-  java_cert:
-    pkcs12_path: /etc/ssl/private/unifi.p12
-    cert_alias: unifi
-    keystore_path: /etc/ssl/private/unifi.keystore.jks
-    keystore_pass: aircontrolenterprise
-    keystore_create: yes
-    state: absent
-
 
 - name: Import SSL into keystore
   java_cert:
