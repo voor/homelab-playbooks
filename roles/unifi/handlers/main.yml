@@ -8,12 +8,3 @@
   service:
     name: unifi
     state: restarted
-
-- name: remove ssl
-  java_cert:
-    pkcs12_path: /etc/ssl/private/unifi.p12
-    cert_alias: unifi
-    keystore_path: /etc/ssl/private/unifi.keystore.jks
-    keystore_pass: aircontrolenterprise
-    keystore_create: yes
-    state: absent

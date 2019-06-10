@@ -47,8 +47,6 @@
     owner: root
     group: ssl-cert
     mode: 0640
-  notify:
-    - remove ssl
 
 - name: Make sure SSL keystore has correct permissions
   file:
@@ -58,12 +56,21 @@
     mode: 0640
 
 - name: Import SSL into keystore
-  java_cert:
-    pkcs12_path: /etc/ssl/private/unifi.p12
-    cert_alias: unifi
-    keystore_path: /etc/ssl/private/unifi.keystore.jks
-    keystore_pass: aircontrolenterprise
-    keystore_create: yes
-    state: present
+  command:
+    chdir: /etc/ssl/private/
+    argv:
+      - keytool
+      - -noprompt
+      - -importkeystore
+      - -srckeystore
+      - unifi.p12
+      - -srcstoretype
+      - PKCS12
+      - -srcstorepass
+      - aircontrolenterprise
+      - -destkeystore
+      - unifi.keystore.jks
+      - -storepass
+      - aircontrolenterprise
   notify:
     - restart unifi
