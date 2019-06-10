@@ -43,6 +43,7 @@
   copy:
     src: "{{cert_p12}}"
     dest: /etc/ssl/certs/private/unifi.p12
+    force: yes
     owner: root
     group: ssl-cert
     mode: 0640
