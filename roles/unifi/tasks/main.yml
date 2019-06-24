@@ -10,6 +10,7 @@
   copy:
     src: "{{cert_fullchain}}"
     dest: /etc/ssl/certs/private/cert.crt
+    force: yes
     owner: root
     group: ssl-cert
     mode: 0644
@@ -20,6 +21,7 @@
   copy:
     src: "{{cert_privkey}}"
     dest: /etc/ssl/certs/private/cert.key
+    force: yes
     owner: root
     group: ssl-cert
     mode: 0640
