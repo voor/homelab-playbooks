@@ -1,0 +1,33 @@
+- include_tasks: nfs.yml
+
+- name: Make sure SSL directory exists
+  file:
+    state: directory
+    path: /etc/gitlab/ssl/
+    owner: root
+    group: root
+    mode: 0700
+
+- name: Store git repositories on nfs.
+  lineinfile:
+    path: /etc/gitlab/gitlab.rb
+    regexp: "^git_data_dirs"
+    line: "git_data_dirs({ \"default\" => { \"path\" => \"{{nfs_where}}/git-data\" } })"
+
+- name: Copy latest certificate
+  copy:
+    src: "{{cert_fullchain}}"
+    dest: "/etc/gitlab/ssl/{{gitlab_url}}.crt"
+    owner: root
+    group: root
+    mode: 0600
+  notify: restart nginx
+
+- name: Copy latest private keys
+  copy:
+    src: "{{cert_privkey}}"
+    dest: "/etc/gitlab/ssl/{{gitlab_url}}.key"
+    owner: root
+    group: root
+    mode: 0600
+  notify: restart nginx

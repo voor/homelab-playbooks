@@ -1,0 +1,10 @@
+#!/usr/bin/env ansible-playbook
+---
+- name: Set Up gitlab
+  hosts: gitlab
+  remote_user: pi
+  become: true
+
+  roles:
+    - common
+    - gitlab
