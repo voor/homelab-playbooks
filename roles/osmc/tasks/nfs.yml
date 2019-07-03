@@ -1,4 +1,23 @@
-- lineinfile:
+- name: Make sure movie directory exists
+  file:
+    path: "/storage/mnt/movie"
+    state: directory
+
+- name: Movies mount
+  lineinfile:
     path: /etc/fstab
-    regexp: "{{nfs_mount_regex}}"
-    line: "{{ro_nfs_mount}}"
+    regexp: "{{movie_mount_regex}}"
+    line: "{{movie_nfs_mount}}"
+  notify: mount all
+
+- name: Make sure tv directory exists
+  file:
+    path: "/storage/mnt/tv"
+    state: directory
+
+- name: TV mount
+  lineinfile:
+    path: /etc/fstab
+    regexp: "{{tv_mount_regex}}"
+    line: "{{tv_nfs_mount}}"
+  notify: mount all

@@ -3,9 +3,11 @@ nfs_where: "/storage/mnt"
 nfs_options: "rsize=32768,wsize=32768,timeo=14,soft"
 mysql_hostname: "rs.planetvoor.com"
 docker_host_address: 172.17.0.1
-nfs_mount_regex: "^storage.planetvoor.com"
+movie_mount_regex: "^storage.planetvoor.com:/storage/mnt/movie"
+tv_mount_regex: "^storage.planetvoor.com:/storage/mnt/tv"
 nfs_mount: "storage.planetvoor.com:/storage/mnt /storage/mnt                  nfs    defaults     0 0"
-ro_nfs_mount: "storage.planetvoor.com:/storage/mnt /storage/mnt nfs ro,noatime,rsize=32768,wsize=32768,nolock,nfsvers=3 0 0"
+movie_nfs_mount: "storage.planetvoor.com:/storage/mnt/movie /storage/mnt/movie nfs ro,noatime,rsize=32768,wsize=32768,nolock,nfsvers=3 0 0"
+tv_nfs_mount: "storage.planetvoor.com:/storage/mnt/tv /storage/mnt/tv nfs ro,noatime,rsize=32768,wsize=32768,nolock,nfsvers=3 0 0"
 timezone: "America/New_York"
 gitlab_url: "gitlab.planetvoor.com"
 ufw_allowed_ports:
