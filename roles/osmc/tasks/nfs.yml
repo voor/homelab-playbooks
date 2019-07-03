@@ -1,6 +1,6 @@
 - name: Make sure movie directory exists
   file:
-    path: "/storage/mnt/movie"
+    path: "/storage/mnt/movies"
     state: directory
 
 - name: Movies mount
