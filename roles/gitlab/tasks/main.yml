@@ -14,6 +14,12 @@
     regexp: "^git_data_dirs"
     line: "git_data_dirs({ \"default\" => { \"path\" => \"{{nfs_where}}/git-data\" } })"
 
+- name: Wait until nfs mount is available
+  lineinfile:
+    path: /etc/gitlab/gitlab.rb
+    regexp: "^high_availability['mountpoint']"
+    line: "high_availability['mountpoint'] = [\"{{nfs_where}}/git-data\"]"
+
 - name: Copy latest certificate
   copy:
     src: "{{cert_fullchain}}"
