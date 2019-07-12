@@ -72,7 +72,7 @@
 - name: Add wildcard host config
   copy:
     dest: /etc/dnsmasq.d/03-wildcard.conf
-    content: "address=/apps.planetvoor.com/192.168.2.50"
+    content: "address=/k8s.planetvoor.com/192.168.2.50"
     decrypt: yes
     force: yes
     group: root
