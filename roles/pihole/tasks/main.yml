@@ -80,3 +80,15 @@
     mode: 0644
     follow: yes
   notify: Restart DNS
+
+- name: Add wildcard host config
+  copy:
+    dest: /etc/dnsmasq.d/04-wildcard2.conf
+    content: "address=/apps.planetvoor.com/192.168.2.55"
+    decrypt: yes
+    force: yes
+    group: root
+    owner: root
+    mode: 0644
+    follow: yes
+  notify: Restart DNS
