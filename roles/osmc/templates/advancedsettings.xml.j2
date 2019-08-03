@@ -1,4 +1,14 @@
 <advancedsettings>
+    <video>
+        <excludefromscan action="append">
+            <regexp>/Extras/</regexp>
+            <regexp>[\\/]Extras[\\/]</regexp>
+        </excludefromscan>
+        <excludetvshowsfromscan action="append">
+            <regexp>/Extras/</regexp>
+            <regexp>[\\/]Extras[\\/]</regexp>
+        </excludetvshowsfromscan>
+    </video>
     <videodatabase>
         <type>mysql</type>
         <host>{{mysql_hostname}}</host>
