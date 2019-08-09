@@ -55,7 +55,7 @@
     owner: root
     mode: 0644
     follow: yes
-  notify: Restart DNS
+  notify: Reboot system
 
 - name: Add hosts config
   copy:
@@ -67,7 +67,7 @@
     owner: root
     mode: 0644
     follow: yes
-  notify: Restart DNS
+  notify: Reboot system
 
 - name: Add wildcard host config
   copy:
@@ -79,7 +79,7 @@
     owner: root
     mode: 0644
     follow: yes
-  notify: Restart DNS
+  notify: Reboot system
 
 - name: Add wildcard host config
   copy:
@@ -91,4 +91,16 @@
     owner: root
     mode: 0644
     follow: yes
-  notify: Restart DNS
+  notify: Reboot system
+
+- name: Delegate to Domain Controller
+  copy:
+    dest: /etc/dnsmasq.d/05-domain.conf
+    content: "server=/lab.planetvoor.com/192.168.2.4"
+    decrypt: yes
+    force: yes
+    group: root
+    owner: root
+    mode: 0644
+    follow: yes
+  notify: Reboot system
