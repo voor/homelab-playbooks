@@ -104,3 +104,15 @@
     mode: 0644
     follow: yes
   notify: Reboot system
+
+- name: Delegate to Domain Controller
+  copy:
+    dest: /etc/dnsmasq.d/06-demo.conf
+    content: "server=/demo.local/192.168.10.5"
+    decrypt: yes
+    force: yes
+    group: root
+    owner: root
+    mode: 0644
+    follow: yes
+  notify: Reboot system
