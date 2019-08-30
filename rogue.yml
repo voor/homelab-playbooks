@@ -1,6 +1,6 @@
 #!/usr/bin/env ansible-playbook
 ---
-- name: Set Up OSMC
+- name: Set Up Baremetal Server
   hosts: rogue
   remote_user: ruser
   become: true

@@ -50,6 +50,7 @@
     owner: root
     group: root
     mode: 0644
+    force: yes
 
 - name: Copy latest private keys
   copy:
@@ -58,6 +59,7 @@
     owner: root
     group: root
     mode: 0644
+    force: yes
 
 - name: Start nginx
   service:
