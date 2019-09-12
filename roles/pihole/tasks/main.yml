@@ -93,6 +93,18 @@
     follow: yes
   notify: Reboot system
 
+- name: Add wildcard host config
+  copy:
+    dest: /etc/dnsmasq.d/05-wildcard-cf.conf
+    content: "address=/cf.planetvoor.com/192.168.2.50"
+    decrypt: yes
+    force: yes
+    group: root
+    owner: root
+    mode: 0644
+    follow: yes
+  notify: Reboot system
+
 - name: Delegate to Domain Controller
   copy:
     dest: /etc/dnsmasq.d/05-domain.conf
