@@ -80,15 +80,15 @@
     state: started
     enabled: yes
 
-- name: Allow services over firewall.
-  firewalld:
-    service: "{{ item }}"
-    permanent: true
-    state: enabled
-    zone: "{{ active_zone }}"
-    immediate: yes
-  with_items:
-    - http
-    - https
-    - ssh
-    - mysql
+#- name: Allow services over firewall.
+#  firewalld:
+#    service: "{{ item }}"
+#    permanent: true
+#    state: enabled
+#    zone: "{{ active_zone }}"
+#    immediate: yes
+#  with_items:
+#    - http
+#    - https
+#    - ssh
+#    - mysql
