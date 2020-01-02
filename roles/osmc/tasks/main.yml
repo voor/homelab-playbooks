@@ -18,7 +18,7 @@
 
 - name: Copy addicted settings file.
   template:
-    src: addic7ted.xml.j2
+    src: addic7ed.xml.j2
     dest: /home/osmc/.kodi/userdata/addon_data/service.subtitles.rvm.addic7ed/settings.xml
     owner: osmc
     group: osmc
