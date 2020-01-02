@@ -4,8 +4,79 @@
   template:
     src: advancedsettings.xml.j2
     dest: /home/osmc/.kodi/userdata/advancedsettings.xml
-    owner: root
-    group: root
+    owner: osmc
+    group: osmc
+    mode: 0644
+
+- name: Create addicted configuration directory
+  file:
+    name: /home/osmc/.kodi/userdata/addon_data/service.subtitles.rvm.addic7ed/
+    state: directory
+    owner: osmc
+    group: osmc
+    mode: 0755
+
+- name: Copy addicted settings file.
+  template:
+    src: addic7ted.xml.j2
+    dest: /home/osmc/.kodi/userdata/addon_data/service.subtitles.rvm.addic7ed/settings.xml
+    owner: osmc
+    group: osmc
+    mode: 0644
+
+- name: Create opensubtitles configuration directory
+  file:
+    name: /home/osmc/.kodi/userdata/addon_data/service.subtitles.opensubtitles/
+    state: directory
+    owner: osmc
+    group: osmc
+    mode: 0755
+
+- name: Copy opensubtitles settings file.
+  template:
+    src: opensubtitles.xml.j2
+    dest: /home/osmc/.kodi/userdata/addon_data/service.subtitles.opensubtitles/settings.xml
+    owner: osmc
+    group: osmc
+    mode: 0644
+
+- name: Create specialfeatures configuration directory
+  file:
+    name: /home/osmc/.kodi/userdata/addon_data/plugin.video.specialfeatures/
+    state: directory
+    owner: osmc
+    group: osmc
+    mode: 0755
+
+- name: Copy specialfeatures settings file.
+  template:
+    src: specialfeatures.xml.j2
+    dest: /home/osmc/.kodi/userdata/addon_data/plugin.video.specialfeatures/settings.xml
+    owner: osmc
+    group: osmc
+    mode: 0644
+
+# Dumb hack since it won't properly take the hostname.
+- name: specialfeatures hack
+  lineinfile:
+    path: /home/osmc/.kodi/addons/plugin.video.specialfeatures/lib/sys_init.py
+    regexp: '^ipadd = addon'
+    line: "ipadd = \"{{mysql_hostname}}\""
+
+- name: Create skin configuration directory
+  file:
+    name: /home/osmc/.kodi/userdata/addon_data/skin.estuary/
+    state: directory
+    owner: osmc
+    group: osmc
+    mode: 0755
+
+- name: Skin settings
+  copy:
+    dest: /home/osmc/.kodi/userdata/addon_data/skin.estuary/settings.xml
+    src: skin.estuary.xml
+    group: osmc
+    owner: osmc
     mode: 0644
 
 - name: ll alias
