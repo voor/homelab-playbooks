@@ -48,20 +48,20 @@
     group: osmc
     mode: 0755
 
-- name: Copy specialfeatures settings file.
-  template:
-    src: specialfeatures.xml.j2
-    dest: /home/osmc/.kodi/userdata/addon_data/plugin.video.specialfeatures/settings.xml
-    owner: osmc
-    group: osmc
-    mode: 0644
+# - name: Copy specialfeatures settings file.
+#   template:
+#     src: specialfeatures.xml.j2
+#     dest: /home/osmc/.kodi/userdata/addon_data/plugin.video.specialfeatures/settings.xml
+#     owner: osmc
+#     group: osmc
+#     mode: 0644
 
-# Dumb hack since it won't properly take the hostname.
-- name: specialfeatures hack
-  lineinfile:
-    path: /home/osmc/.kodi/addons/plugin.video.specialfeatures/lib/sys_init.py
-    regexp: '^ipadd = addon'
-    line: "ipadd = \"{{mysql_hostname}}\""
+# # Dumb hack since it won't properly take the hostname.
+# - name: specialfeatures hack
+#   lineinfile:
+#     path: /home/osmc/.kodi/addons/plugin.video.specialfeatures/lib/sys_init.py
+#     regexp: '^ipadd = addon'
+#     line: "ipadd = \"{{mysql_hostname}}\""
 
 - name: Create skin configuration directory
   file:
