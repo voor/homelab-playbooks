@@ -16,34 +16,27 @@ ssh administrator@dc.lab.planetvoor.com Import-PfxCertificate -FilePath 'c:\cert
 
 # ssh administrator@dc.lab.planetvoor.com Add-AdfsCertificate -CertificateType "Service-Communications" -Thumbprint $SHA_FINGERPRINT
 
-credhub s -t certificate -n concourse/homelab/pks_tls -c certs/planetvoor.com/fullchain.pem -p certs/planetvoor.com/privkey.pem
+# credhub s -t certificate -n concourse/homelab/pks_tls -c certs/planetvoor.com/fullchain.pem -p certs/planetvoor.com/privkey.pem
 
-kubectx insecure
+#kubectl create ns gitlab-system || :
+#kubectl create ns concourse-system || :
+#kubectl create ns harbor-system || :
+#kubectl create ns ingress || :
+#kubectl create ns cf || :
 
-kubectl create secret -n gitlab-system tls gitlab-ingress --cert=certs/planetvoor.com/fullchain.pem --key=certs/planetvoor.com/privkey.pem --dry-run -o yaml | kubectl replace -f -
+#kubectl create secret -n gitlab-system tls gitlab-ingress --cert=certs/planetvoor.com/fullchain.pem --key=certs/planetvoor.com/privkey.pem --dry-run -o yaml | kubectl apply -f - || :
 
-kubectl create secret -n concourse-system tls concourse-ingress --cert=certs/planetvoor.com/fullchain.pem --key=certs/planetvoor.com/privkey.pem --dry-run -o yaml | kubectl replace -f -
+#kubectl create secret -n concourse-system tls concourse-ingress --cert=certs/planetvoor.com/fullchain.pem --key=certs/planetvoor.com/privkey.pem --dry-run -o yaml | kubectl apply -f - || :
 
-kubectl create secret -n harbor-system generic harbor-ingress --from-file=ca.crt=certs/planetvoor.com/ca.pem --from-file=tls.crt=certs/planetvoor.com/fullchain.pem --from-file=tls.key=certs/planetvoor.com/privkey.pem -o yaml --dry-run | kubectl replace -f -
+#kubectl create secret -n harbor-system generic harbor-ingress --from-file=ca.crt=certs/planetvoor.com/ca.pem --from-file=tls.crt=certs/planetvoor.com/fullchain.pem --from-file=tls.key=certs/planetvoor.com/privkey.pem -o yaml --dry-run | kubectl apply -f - || :
 
-kubectl create secret -n ingress-nginx tls default-ssl-certificate --cert=certs/planetvoor.com/fullchain.pem --key=certs/planetvoor.com/privkey.pem --dry-run -o yaml | kubectl replace -f -
+#kubectl create secret -n ingress tls default-ssl-certificate --cert=certs/planetvoor.com/fullchain.pem --key=certs/planetvoor.com/privkey.pem --dry-run -o yaml | kubectl apply -f - || :
 
-kubectl create secret -n default tls build-service-certificate --cert=certs/planetvoor.com/fullchain.pem --key=certs/planetvoor.com/privkey.pem --dry-run -o yaml | kubectl replace -f -
+#kubectl create secret -n default tls build-service-certificate --cert=certs/planetvoor.com/fullchain.pem --key=certs/planetvoor.com/privkey.pem --dry-run -o yaml | kubectl apply -f -
 
-kubectx -
-kubectx main
+#kubectl create secret -n cf tls ingress --cert=certs/cf.planetvoor.com/fullchain.pem --key=certs/cf.planetvoor.com/privkey.pem --dry-run -o yaml | kubectl apply -f -
 
-kubectl create secret -n gitlab-system tls gitlab-ingress --cert=certs/apps.planetvoor.com/fullchain.pem --key=certs/apps.planetvoor.com/privkey.pem --dry-run -o yaml | kubectl replace -f -
-
-kubectl create secret -n concourse-system tls concourse-ingress --cert=certs/apps.planetvoor.com/fullchain.pem --key=certs/apps.planetvoor.com/privkey.pem --dry-run -o yaml | kubectl replace -f -
-
-kubectl create secret -n harbor-system generic harbor-ingress --from-file=ca.crt=certs/planetvoor.com/ca.pem --from-file=tls.crt=certs/apps.planetvoor.com/fullchain.pem --from-file=tls.key=certs/apps.planetvoor.com/privkey.pem -o yaml --dry-run | kubectl replace -f -
-
-kubectl create secret -n ingress-nginx tls default-ssl-certificate --cert=certs/apps.planetvoor.com/fullchain.pem --key=certs/apps.planetvoor.com/privkey.pem --dry-run -o yaml | kubectl replace -f -
-
-kubectl create secret -n default tls build-service-certificate --cert=certs/planetvoor.com/fullchain.pem --key=certs/planetvoor.com/privkey.pem --dry-run -o yaml | kubectl replace -f -
-
-kubectx -
+# kubectx -
 
 popd
 pushd ${ANSIBLE_DIR}
@@ -54,6 +47,6 @@ ansible-playbook -i hosts.yml osmc.yml
 
 ansible-playbook -i hosts.yml  unifi.yml
 
-om -k update-ssl-certificate --certificate-pem "$(cat .secrets/fullchain.pem)" --private-key-pem "$(cat .secrets/privkey.pem)"
+# om -k update-ssl-certificate --certificate-pem "$(cat .secrets/fullchain.pem)" --private-key-pem "$(cat .secrets/privkey.pem)"
 
 popd

@@ -1,6 +1,6 @@
-- name: Set Hostname
-  hostname:
-    name: "{{ system_hostname }}"
+#- name: Set Hostname
+#  hostname:
+#    name: "{{ system_hostname }}"
 
 - name: Set Timezone
   timezone:

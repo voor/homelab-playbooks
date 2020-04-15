@@ -1,12 +1,14 @@
 ---
 dns_domain_name: planetvoor.com
 nfs_exports: 
-  - "/storage/mnt 192.168.2.0/255.255.255.0(rw,no_subtree_check,fsid=0,crossmnt)"
-  - "/storage/mnt/media 192.168.2.0/255.255.255.0(rw,no_subtree_check,async,fsid=0,all_squash,anonuid=1000,anongid=1000)"
-  - "/storage/mnt/comics 192.168.2.0/255.255.255.0(rw,no_subtree_check,async,fsid=0,all_squash,anonuid=1000,anongid=1000)"
-  - "/storage/mnt/movies 192.168.2.0/255.255.255.0(rw,no_subtree_check,async,fsid=0,all_squash,anonuid=1000,anongid=1000)"
-  - "/storage/mnt/tv 192.168.2.0/255.255.255.0(rw,no_subtree_check,async,fsid=0,all_squash,anonuid=1000,anongid=1000)"
-  - "/storage/objects 192.168.2.0/255.255.255.0(rw,no_subtree_check,async,fsid=0,no_root_squash,anonuid=1000,anongid=1000)"
+  - "/storage/mnt 192.168.2.0/255.255.255.0(rw,no_subtree_check,fsid=root)"
+  - "/storage/mnt/media 192.168.2.0/255.255.255.0(rw,no_subtree_check,async,fsid=1,all_squash,anonuid=1000,anongid=1000)"
+  - "/storage/mnt/comics 192.168.2.0/255.255.255.0(rw,no_subtree_check,async,fsid=2,all_squash,anonuid=1000,anongid=1000)"
+  - "/storage/mnt/movies 192.168.2.0/255.255.255.0(rw,no_subtree_check,async,fsid=3,all_squash,anonuid=1000,anongid=1000)"
+  - "/storage/mnt/tv 192.168.2.0/255.255.255.0(rw,no_subtree_check,async,fsid=4,all_squash,anonuid=1000,anongid=1000)"
+  - "/storage/mnt/storage 192.168.2.0/255.255.255.0(rw,no_root_squash,no_subtree_check,sync,fsid=5)"
+  - "/storage/mnt/objects 192.168.2.0/255.255.255.0(rw,no_root_squash,no_subtree_check,sync,fsid=6)"
+  - "/storage/ssd01 192.168.2.0/255.255.255.0(rw,no_root_squash,no_subtree_check,sync,fsid=7)"
 nfs_server_user: nobody
 network_subnet: 192.168.2.0/255.255.255.0
 eth_interface: enp10s0f1
