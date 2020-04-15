@@ -6,6 +6,24 @@
     group: ssl-cert
     mode: 0770
 
+- name: Make sure site directory exists
+  file:
+    state: directory
+    path: /usr/lib/unifi/data/sites/default
+    owner: unifi
+    group: unifi
+    mode: 0770
+
+- name: Copy config.gateway.json
+  template:
+    src: config.gateway.json.j2
+    dest: /usr/lib/unifi/data/sites/default/config.gateway.json
+    owner: unifi
+    group: unifi
+    mode: 0644
+  notify:
+    - restart unifi
+
 - name: Copy latest certificate
   copy:
     src: "{{cert_fullchain}}"

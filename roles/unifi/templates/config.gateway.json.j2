@@ -1,0 +1,132 @@
+{
+  "interfaces": {
+    "ethernet": {
+      "eth0": {
+        "mtu": 1600,
+        "address": ["192.168.2.1/24"],
+        "description": "LAN",
+        "firewall": {
+          "in": {
+            "ipv6-name": "LANv6_IN",
+            "name": "LAN_IN"
+          },
+          "local": {
+            "ipv6-name": "LANv6_LOCAL",
+            "name": "LAN_LOCAL"
+          },
+          "out": {
+            "ipv6-name": "LANv6_OUT",
+            "name": "LAN_OUT"
+          }
+        },
+        "vif": {
+          "10": {
+            "address": ["192.168.10.1/24"],
+            "firewall": {
+              "in": {
+                "ipv6-name": "LANv6_IN",
+                "name": "LAN_IN"
+              },
+              "local": {
+                "ipv6-name": "LANv6_LOCAL",
+                "name": "LAN_LOCAL"
+              },
+              "out": {
+                "ipv6-name": "LANv6_OUT",
+                "name": "LAN_OUT"
+              }
+            }
+          },
+          "100": {
+            "mtu": 1600,
+            "address": ["192.168.5.1/24"],
+            "firewall": {
+              "in": {
+                "ipv6-name": "LANv6_IN",
+                "name": "LAN_IN"
+              },
+              "local": {
+                "ipv6-name": "LANv6_LOCAL",
+                "name": "LAN_LOCAL"
+              },
+              "out": {
+                "ipv6-name": "LANv6_OUT",
+                "name": "LAN_OUT"
+              }
+            }
+          },
+          "200": {
+            "mtu": 1600,
+            "address": ["192.168.6.1/24"],
+            "firewall": {
+              "in": {
+                "ipv6-name": "LANv6_IN",
+                "name": "LAN_IN"
+              },
+              "local": {
+                "ipv6-name": "LANv6_LOCAL",
+                "name": "LAN_LOCAL"
+              },
+              "out": {
+                "ipv6-name": "LANv6_OUT",
+                "name": "LAN_OUT"
+              }
+            }
+          },
+          "300": {
+            "mtu": 1600,
+            "address": ["192.168.7.1/24"],
+            "firewall": {
+              "in": {
+                "ipv6-name": "LANv6_IN",
+                "name": "LAN_IN"
+              },
+              "local": {
+                "ipv6-name": "LANv6_LOCAL",
+                "name": "LAN_LOCAL"
+              },
+              "out": {
+                "ipv6-name": "LANv6_OUT",
+                "name": "LAN_OUT"
+              }
+            }
+          },
+          "4": {
+            "address": ["192.168.4.1/24"],
+            "firewall": {
+              "in": {
+                "ipv6-name": "LANv6_IN",
+                "name": "LAN_IN"
+              },
+              "local": {
+                "ipv6-name": "LANv6_LOCAL",
+                "name": "LAN_LOCAL"
+              },
+              "out": {
+                "ipv6-name": "LANv6_OUT",
+                "name": "LAN_OUT"
+              }
+            }
+          },
+          "5": {
+            "address": ["192.168.3.1/24"],
+            "firewall": {
+              "in": {
+                "ipv6-name": "LANv6_IN",
+                "name": "LAN_IN"
+              },
+              "local": {
+                "ipv6-name": "LANv6_LOCAL",
+                "name": "LAN_LOCAL"
+              },
+              "out": {
+                "ipv6-name": "LANv6_OUT",
+                "name": "LAN_OUT"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
