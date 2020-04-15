@@ -9,3 +9,4 @@ nfs_exports:
   - "/storage/objects 192.168.2.0/255.255.255.0(rw,no_subtree_check,async,fsid=0,no_root_squash,anonuid=1000,anongid=1000)"
 nfs_server_user: nobody
 network_subnet: 192.168.2.0/255.255.255.0
+eth_interface: enp10s0f1
