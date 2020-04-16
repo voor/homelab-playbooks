@@ -81,24 +81,35 @@
     update_cache: yes
   environment:
     PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:{{ ansible_env.PATH }}"
+  when: ansible_os_family == "Debian"
 
 - name: Run dist upgrade
   apt:
     upgrade: dist
   environment:
     PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:{{ ansible_env.PATH }}"
+  when: ansible_os_family == "Debian"
 
 - name: Remove dependencies that are no longer required
   apt:
     autoremove: yes
   environment:
     PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:{{ ansible_env.PATH }}"
+  when: ansible_os_family == "Debian"
 
 - name: Remove useless packages from the cache
   apt:
     autoclean: yes
   environment:
     PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:{{ ansible_env.PATH }}"
+  when: ansible_os_family == "Debian"
+
+- name: Run update
+  yum:
+    name: '*'
+    state: latest
+    update_cache: yes
+  when: ansible_os_family == "Red Hat"
 
 # - name: Make sure firewall tools are installed.
 #   package:
