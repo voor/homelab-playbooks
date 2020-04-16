@@ -3,5 +3,6 @@
     path: /etc/bash.bashrc
     regexp: '^alias ll="ls -l"'
     line: 'alias ll="ls -l"'
+  when: ansible_os_family == "Debian"
 
 - include_tasks: secure.yml

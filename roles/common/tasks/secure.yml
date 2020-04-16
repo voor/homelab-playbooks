@@ -28,6 +28,13 @@
   service:
     name: ssh
     enabled: yes
+  when: ansible_os_family == "Debian"
+
+- name: ssh starts on boot
+  service:
+    name: sshd
+    enabled: yes
+  when: ansible_os_family == "Red Hat"
 
 - name: Add authorized_keys for the user
   authorized_key:

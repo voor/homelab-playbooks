@@ -2,7 +2,7 @@
 ---
 - name: Set Up NFS Server
   hosts: nfs-server
-  remote_user: suser
+  remote_user: "{{ server_user_name }}"
   become: true
 
   roles:
