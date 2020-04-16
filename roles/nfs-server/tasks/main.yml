@@ -1,11 +1,11 @@
-- name: Install Ansible Python 2 Dependencies
+- name: Install Ansible Python 3 Dependencies
   package:
     name: "{{ item }}"
     state: present
   with_items:
-    - python-firewall
-    - libselinux-python
-    - libsemanage-python
+    - python3-firewall
+    - python3-libselinux
+    - python3-libsemanage
 
 - name: Ensure NFS utilities are installed.
   package:
