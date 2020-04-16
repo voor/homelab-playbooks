@@ -85,9 +85,9 @@
     - restart nfs
     
 - lineinfile:
-    path: /etc/fstab
-    regexp: "^RPCNFSDCOUNT="
-    line: "RPCNFSDCOUNT=16"
+    path: /etc/nfs.conf
+    regexp: "^threads"
+    line: "threads=16"
   notify:
     - restart nfs
 
