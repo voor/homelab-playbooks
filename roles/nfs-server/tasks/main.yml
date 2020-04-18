@@ -91,12 +91,12 @@
   notify:
     - restart nfs
 
-- name: Change to jumbo frames
-  nmcli:
-    conn_name: "{{ eth_interface }}"
-    mtu: 9000
-    type: ethernet
-    state: present
+# - name: Change to jumbo frames
+#   nmcli:
+#     conn_name: "{{ eth_interface }}"
+#     mtu: 9000
+#     type: ethernet
+#     state: present
 
 - name: Ensure nfs is running.
   service:
