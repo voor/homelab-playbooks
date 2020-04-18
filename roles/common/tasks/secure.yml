@@ -34,7 +34,7 @@
   service:
     name: sshd
     enabled: yes
-  when: ansible_os_family == "Red Hat"
+  when: ansible_os_family == "RedHat"
 
 - name: Add authorized_keys for the user
   authorized_key:
@@ -109,7 +109,7 @@
     name: '*'
     state: latest
     update_cache: yes
-  when: ansible_os_family == "Red Hat"
+  when: ansible_os_family == "RedHat"
 
 # - name: Make sure firewall tools are installed.
 #   package:
