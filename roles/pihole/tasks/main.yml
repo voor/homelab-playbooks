@@ -108,7 +108,7 @@
 - name: Delegate to Domain Controller
   copy:
     dest: /etc/dnsmasq.d/05-domain.conf
-    content: "server=/lab.planetvoor.com/192.168.2.4"
+    content: "server=/zoom.us/1.1.1.1"
     decrypt: yes
     force: yes
     group: root
