@@ -45,7 +45,7 @@
 
 - name: Copy latest certificate
   copy:
-    src: ./.secrets/fullchain.pem
+    src: "{{cert_fullchain}}"
     dest: /etc/ssl/certs/private/cert.crt
     owner: root
     group: root
@@ -55,7 +55,7 @@
 
 - name: Copy latest private keys
   copy:
-    src: ./.secrets/privkey.pem
+    src: "{{cert_privkey}}"
     dest: /etc/ssl/certs/private/cert.key
     owner: root
     group: root
