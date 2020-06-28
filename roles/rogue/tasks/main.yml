@@ -34,6 +34,7 @@
   with_items:
     - kodi.conf
     - media.conf
+  notify: restart nginx
 
 - name: Make sure private directory exists
   file:
