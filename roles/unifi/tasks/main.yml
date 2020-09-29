@@ -48,6 +48,7 @@
 
 - name: Generate PKCS#12 file
   delegate_to: localhost
+  connection: local
   openssl_pkcs12:
     action: export
     path: "{{cert_p12}}"
