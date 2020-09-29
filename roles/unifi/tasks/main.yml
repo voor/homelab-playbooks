@@ -47,8 +47,8 @@
     - restart nginx
 
 - name: Generate PKCS#12 file
-  local_action:
-    module: openssl_pkcs12
+  delegate_to: localhost
+  openssl_pkcs12:
     action: export
     path: "{{cert_p12}}"
     friendly_name: "unifi"
