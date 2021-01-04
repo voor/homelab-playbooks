@@ -89,6 +89,7 @@
   environment:
     PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:{{ ansible_env.PATH }}"
   when: ansible_os_family == "Debian" or ansible_os_family == "OSMC"
+  notify: Reboot system
 
 - name: Remove dependencies that are no longer required
   apt:
