@@ -48,7 +48,7 @@
   register: new_private_keys
 
 - name: Generate PKCS#12 file
-  community.crypto.openssl_pkcs12:
+  openssl_pkcs12:
     action: export
     path: /etc/ssl/private/unifi.p12
     friendly_name: "unifi"
