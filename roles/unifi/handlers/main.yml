@@ -8,3 +8,8 @@
   service:
     name: unifi
     state: restarted
+
+- name: restart unifi-core
+  service:
+    name: unifi-core
+    state: restarted
