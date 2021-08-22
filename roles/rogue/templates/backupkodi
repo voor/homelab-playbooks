@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -euxo pipefail
+
+ERROR_LOG="/storage/mnt/storage/kodi-video-backups/error.log"
+FILEDATE=$(date +%y-%m-%d)
+echo "--- LOG FOR $FILEDATE ---" >> $ERROR_LOG
+mysqldump \
+  -u xbmc \
+  -pxbmc \
+  --databases \
+  --single-transaction \
+  --quick \
+  --lock-tables=false MyVideos119 \
+  2>> $ERROR_LOG \
+  | gzip > /storage/mnt/storage/kodi-video-backups/kodi-video-backup-${FILEDATE}.sql.gz \
+  2>> $ERROR_LOG
