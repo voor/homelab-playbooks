@@ -40,6 +40,7 @@
     - lightdm
     - lxde
     - accountsservice
+    - steamlink
   notify: Restart lightdm
 
 - name: lightdm on boot
