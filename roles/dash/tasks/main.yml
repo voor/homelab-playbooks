@@ -6,6 +6,15 @@
     state: present
   notify: Reboot
 
+- name: Setup static IP Address
+  blockinfile:
+    path: /etc/dhcpcd.conf
+    block: |
+      interface {{ eth_interface }}
+      static ip_address={{ static_ip | ipv4 }}
+      static routers={{ static_router | ipv4 }}
+  notify: Restart network
+
 - name: HDMI normal mode
   lineinfile:
     dest: /boot/config.txt

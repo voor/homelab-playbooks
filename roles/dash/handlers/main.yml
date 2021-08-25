@@ -15,3 +15,7 @@
     path: "/home/{{ autostart_user }}/.config/chromium/Singleton*"
     state: absent
 
+- name: Restart network
+  service:
+    name: dhcpcd
+    state: restarted
