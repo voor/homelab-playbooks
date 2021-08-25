@@ -1,3 +1,12 @@
+- name: Additional Dependencies
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - python3-pip
+    - libssl-dev
+    - python3-openssl
+
 - name: Make sure private directory exists
   file:
     state: directory
