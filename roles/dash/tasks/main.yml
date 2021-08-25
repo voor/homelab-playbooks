@@ -41,6 +41,7 @@
     - lxde
     - accountsservice
     - steamlink
+    - cec-utils
   notify: Restart lightdm
 
 - name: lightdm on boot
