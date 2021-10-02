@@ -6,3 +6,5 @@ sudo dnf install \
   $(curl -sL https://api.github.com/repos/mozilla/sops/releases/latest | jq -r '.assets[].browser_download_url' | grep -e rpm) \
   $(curl -sL https://api.github.com/repos/aquasecurity/trivy/releases/latest | jq -r '.assets[].browser_download_url' | grep -e rpm | grep 64bit) \
   https://zoom.us/client/latest/zoom_x86_64.rpm
+
+sudo bash -c 'curl -L https://carvel.dev/install.sh | bash'
