@@ -12,11 +12,6 @@ sudo dnf install \
 
 sudo bash -c 'curl -L https://carvel.dev/install.sh | bash'
 
-# oras
-# kp
-# pivnet
-# age + age-keygen
-
 mkdir -p /tmp/new_cli
 
 # clusterctl
@@ -45,5 +40,27 @@ podman cp crane:/ko-app/crane /tmp/new_cli/crane
 podman rm crane
 sudo install -m 755 -g root -o root -Z /tmp/new_cli/crane /usr/local/bin/crane
 crane version
+
+# age
+curl -sL -o- $(curl -sL https://api.github.com/repos/FiloSottile/age/releases/latest | jq -r '.assets[].browser_download_url' | grep linux | grep amd64) | tar -C /tmp/new_cli -xvz
+sudo install -m 755 -g root -o root -Z /tmp/new_cli/age/age /usr/local/bin/age
+sudo install -m 755 -g root -o root -Z /tmp/new_cli/age/age-keygen /usr/local/bin/age-keygen
+age --version
+age-keygen --version
+
+# oras
+curl -sL -o- $(curl -sL https://api.github.com/repos/oras-project/oras/releases/latest | jq -r '.assets[].browser_download_url' | grep linux | grep amd64 | grep -v '\.asc') | tar -C /tmp/new_cli -xvz
+sudo install -m 755 -g root -o root -Z /tmp/new_cli/oras /usr/local/bin/oras
+oras version
+
+# kp
+curl -sL -o /tmp/new_cli/kp $(curl -sL https://api.github.com/repos/vmware-tanzu/kpack-cli/releases/latest | jq -r '.assets[].browser_download_url' | grep linux)
+sudo install -m 755 -g root -o root -Z /tmp/new_cli/kp /usr/local/bin/kp
+kp version
+
+# pivnet
+curl -sL -o /tmp/new_cli/pivnet $(curl -sL https://api.github.com/repos/pivotal-cf/pivnet-cli/releases/latest | jq -r '.assets[].browser_download_url' | grep linux)
+sudo install -m 755 -g root -o root -Z /tmp/new_cli/pivnet /usr/local/bin/pivnet
+pivnet version
 
 rm -rf /tmp/new_cli
