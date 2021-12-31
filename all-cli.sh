@@ -1,3 +1,7 @@
+#!/usr/bin/env bash
+
+set -euxo pipefail
+
 sudo -v
 
 sudo dnf install \
@@ -34,13 +38,6 @@ curl -sL -o /tmp/new_cli/sget $(curl -sL https://api.github.com/repos/sigstore/c
 sudo install -m 755 -g root -o root -Z /tmp/new_cli/sget /usr/local/bin/sget
 sget version
 
-# crane
-podman create --name crane gcr.io/go-containerregistry/crane:$(curl -sL https://api.github.com/repos/google/go-containerregistry/releases/latest | jq .name -rc)
-podman cp crane:/ko-app/crane /tmp/new_cli/crane
-podman rm crane
-sudo install -m 755 -g root -o root -Z /tmp/new_cli/crane /usr/local/bin/crane
-crane version
-
 # age
 curl -sL -o- $(curl -sL https://api.github.com/repos/FiloSottile/age/releases/latest | jq -r '.assets[].browser_download_url' | grep linux | grep amd64) | tar -C /tmp/new_cli -xvz
 sudo install -m 755 -g root -o root -Z /tmp/new_cli/age/age /usr/local/bin/age
@@ -62,5 +59,12 @@ kp version
 curl -sL -o /tmp/new_cli/pivnet $(curl -sL https://api.github.com/repos/pivotal-cf/pivnet-cli/releases/latest | jq -r '.assets[].browser_download_url' | grep linux)
 sudo install -m 755 -g root -o root -Z /tmp/new_cli/pivnet /usr/local/bin/pivnet
 pivnet version
+
+# crane
+podman create --name crane gcr.io/go-containerregistry/crane:$(curl -sL https://api.github.com/repos/google/go-containerregistry/releases/latest | jq .name -rc)
+podman cp crane:/ko-app/crane /tmp/new_cli/crane
+podman rm crane
+sudo install -m 755 -g root -o root -Z /tmp/new_cli/crane /usr/local/bin/crane
+crane version
 
 rm -rf /tmp/new_cli
