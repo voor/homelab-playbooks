@@ -12,6 +12,7 @@ sudo dnf install \
   $(curl -sL https://api.github.com/repos/mozilla/sops/releases/latest | jq -r '.assets[].browser_download_url' | grep -e rpm) \
   $(curl -sL https://api.github.com/repos/aquasecurity/trivy/releases/latest | jq -r '.assets[].browser_download_url' | grep -e rpm | grep 64bit) \
   $(curl -sL https://api.github.com/repos/tektoncd/cli/releases/latest | jq -r '.assets[].browser_download_url' | grep -e rpm | grep 64bit) \
+  $(curl -sL https://api.github.com/repos/anchore/grype/releases/latest | jq -r '.assets[].browser_download_url' | grep -e rpm | grep amd64) \
   https://zoom.us/client/latest/zoom_x86_64.rpm
 
 sudo bash -c 'curl -L https://carvel.dev/install.sh | bash'
@@ -29,12 +30,12 @@ sudo install -m 755 -g root -o root -Z /tmp/new_cli/kind /usr/local/bin/kind
 kind version
 
 # cosign
-curl -sL -o /tmp/new_cli/cosign $(curl -sL https://api.github.com/repos/sigstore/cosign/releases/latest | jq -r '.assets[].browser_download_url' | grep linux | grep amd64 | grep -v '\.sig' | grep -v pivkey | grep -v cosigned | grep cosign)
+curl -sL -o /tmp/new_cli/cosign $(curl -sL https://api.github.com/repos/sigstore/cosign/releases/latest | jq -r '.assets[].browser_download_url' | grep linux | grep amd64 | grep -v '\.sig' | grep -v pivkey | grep -v cosigned | grep -v sget | grep -v keyless | grep -v sbom)
 sudo install -m 755 -g root -o root -Z /tmp/new_cli/cosign /usr/local/bin/cosign
 cosign version
 
 # cosign - sget
-curl -sL -o /tmp/new_cli/sget $(curl -sL https://api.github.com/repos/sigstore/cosign/releases/latest | jq -r '.assets[].browser_download_url' | grep linux | grep amd64 | grep -v '\.sig' | grep -v pivkey | grep -v cosigned | grep sget)
+curl -sL -o /tmp/new_cli/sget $(curl -sL https://api.github.com/repos/sigstore/cosign/releases/latest | jq -r '.assets[].browser_download_url' | grep linux | grep amd64 | grep -v '\.sig' | grep -v pivkey | grep -v cosigned | grep sget | grep -v keyless | grep -v sbom)
 sudo install -m 755 -g root -o root -Z /tmp/new_cli/sget /usr/local/bin/sget
 sget version
 
@@ -61,7 +62,7 @@ sudo install -m 755 -g root -o root -Z /tmp/new_cli/pivnet /usr/local/bin/pivnet
 pivnet version
 
 # crane
-podman create --name crane gcr.io/go-containerregistry/crane:$(curl -sL https://api.github.com/repos/google/go-containerregistry/releases/latest | jq .name -rc)
+podman create --name crane gcr.io/go-containerregistry/crane:latest
 podman cp crane:/ko-app/crane /tmp/new_cli/crane
 podman rm crane
 sudo install -m 755 -g root -o root -Z /tmp/new_cli/crane /usr/local/bin/crane
