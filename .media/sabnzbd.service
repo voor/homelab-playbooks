@@ -3,14 +3,16 @@
 #
 
 [Unit]
-Description=SABnzbd Daemon
+Description=SABnzbd
+Wants=network-online.target
+After=network-online.target
 
 [Service]
-Type=forking
+Type=simple
 User=ruser
 Group=ruser
-ExecStart=/usr/bin/python /home/ruser/git/sabnzbd/SABnzbd.py --daemon --config-file=/home/ruser/.sabnzbd/sabnzbd.ini -s 0.0.0.0
-GuessMainPID=no
+PIDFile=/home/ruser/.sabnzbd/sabnzbd.pid
+ExecStart=/usr/bin/python3 /home/ruser/git/sabnzbd/SABnzbd.py -b 0 --pidfile /home/ruser/.sabnzbd/sabnzbd.pid --config-file=/home/ruser/.sabnzbd/sabnzbd.ini -s 127.0.0.1
 
 [Install]
 WantedBy=multi-user.target
