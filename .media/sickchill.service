@@ -1,0 +1,18 @@
+#
+# Systemd unit file for SickRage
+#
+
+[Unit]
+Description=SickRage Daemon
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=ruser
+Group=ruser
+PIDFile=/home/ruser/.sickrage/sickchill.pid
+ExecStart=/usr/bin/python3 /home/ruser/git/sickrage/SickChill.py --nolaunch --datadir=/home/ruser/.sickrage/ --pidfile=/home/ruser/.sickrage/sickchill.pid
+
+[Install]
+WantedBy=multi-user.target

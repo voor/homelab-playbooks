@@ -23,21 +23,25 @@ mkdir -p /tmp/new_cli
 curl -sL -o /tmp/new_cli/clusterctl $(curl -sL https://api.github.com/repos/kubernetes-sigs/cluster-api/releases/latest | jq -r '.assets[].browser_download_url' | grep linux | grep amd64)
 sudo install -m 755 -g root -o root -Z /tmp/new_cli/clusterctl /usr/local/bin/clusterctl
 clusterctl version
+rm -rf /tmp/new_cli/clusterctl
 
 # kind
 curl -sL -o /tmp/new_cli/kind $(curl -sL https://api.github.com/repos/kubernetes-sigs/kind/releases/latest | jq -r '.assets[].browser_download_url' | grep linux | grep amd64)
 sudo install -m 755 -g root -o root -Z /tmp/new_cli/kind /usr/local/bin/kind
 kind version
+rm -rf /tmp/new_cli/kind
 
 # cosign
 curl -sL -o /tmp/new_cli/cosign $(curl -sL https://api.github.com/repos/sigstore/cosign/releases/latest | jq -r '.assets[].browser_download_url' | grep linux | grep amd64 | grep -v '\.sig' | grep -v pivkey | grep -v cosigned | grep -v sget | grep -v keyless | grep -v sbom)
 sudo install -m 755 -g root -o root -Z /tmp/new_cli/cosign /usr/local/bin/cosign
 cosign version
+rm -rf /tmp/new_cli/cosign
 
 # cosign - sget
 curl -sL -o /tmp/new_cli/sget $(curl -sL https://api.github.com/repos/sigstore/cosign/releases/latest | jq -r '.assets[].browser_download_url' | grep linux | grep amd64 | grep -v '\.sig' | grep -v pivkey | grep -v cosigned | grep sget | grep -v keyless | grep -v sbom)
 sudo install -m 755 -g root -o root -Z /tmp/new_cli/sget /usr/local/bin/sget
 sget version
+rm -rf /tmp/new_cli/sget
 
 # age
 curl -sL -o- $(curl -sL https://api.github.com/repos/FiloSottile/age/releases/latest | jq -r '.assets[].browser_download_url' | grep linux | grep amd64) | tar -C /tmp/new_cli -xvz
@@ -55,11 +59,13 @@ oras version
 curl -sL -o /tmp/new_cli/kp $(curl -sL https://api.github.com/repos/vmware-tanzu/kpack-cli/releases/latest | jq -r '.assets[].browser_download_url' | grep linux)
 sudo install -m 755 -g root -o root -Z /tmp/new_cli/kp /usr/local/bin/kp
 kp version
+rm -rf /tmp/new_cli/kp
 
 # pivnet
 curl -sL -o /tmp/new_cli/pivnet $(curl -sL https://api.github.com/repos/pivotal-cf/pivnet-cli/releases/latest | jq -r '.assets[].browser_download_url' | grep linux)
 sudo install -m 755 -g root -o root -Z /tmp/new_cli/pivnet /usr/local/bin/pivnet
 pivnet version
+rm -rf /tmp/new_cli/pivnet
 
 # crane
 podman create --name crane gcr.io/go-containerregistry/crane:latest
@@ -67,5 +73,11 @@ podman cp crane:/ko-app/crane /tmp/new_cli/crane
 podman rm crane
 sudo install -m 755 -g root -o root -Z /tmp/new_cli/crane /usr/local/bin/crane
 crane version
+
+# pinniped
+curl -sL -o /tmp/new_cli/pinniped $(curl -sL https://api.github.com/repos/vmware-tanzu/pinniped/releases/latest | jq -r '.assets[].browser_download_url' | grep linux)
+sudo install -m 755 -g root -o root -Z /tmp/new_cli/pinniped /usr/local/bin/pinniped
+pinniped version
+rm -rf /tmp/new_cli/pinniped
 
 rm -rf /tmp/new_cli
