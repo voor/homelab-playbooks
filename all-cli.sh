@@ -9,7 +9,7 @@ sudo dnf install \
   $(curl -sL https://api.github.com/repos/open-policy-agent/conftest/releases/latest | jq -r '.assets[].browser_download_url' | grep -e rpm | grep -e amd64) \
   $(curl -sL https://api.github.com/repos/vmware-tanzu/octant/releases/latest | jq -r '.assets[].browser_download_url' | grep -e rpm | grep -e 64bit) \
   https://s3.amazonaws.com/session-manager-downloads/plugin/latest/linux_64bit/session-manager-plugin.rpm \
-  $(curl -sL https://api.github.com/repos/mozilla/sops/releases/latest | jq -r '.assets[].browser_download_url' | grep -e rpm) \
+  $(curl -sL https://api.github.com/repos/mozilla/sops/releases/latest | jq -r '.assets[].browser_download_url' | grep -e x86_64 | grep -e rpm) \
   $(curl -sL https://api.github.com/repos/aquasecurity/trivy/releases/latest | jq -r '.assets[].browser_download_url' | grep -e rpm | grep 64bit) \
   $(curl -sL https://api.github.com/repos/tektoncd/cli/releases/latest | jq -r '.assets[].browser_download_url' | grep -e rpm | grep 64bit) \
   $(curl -sL https://api.github.com/repos/anchore/grype/releases/latest | jq -r '.assets[].browser_download_url' | grep -e rpm | grep amd64) \
