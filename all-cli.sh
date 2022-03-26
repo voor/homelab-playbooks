@@ -19,6 +19,12 @@ sudo bash -c 'curl -L https://carvel.dev/install.sh | bash'
 
 mkdir -p /tmp/new_cli
 
+# pack
+curl -sL -o- $(curl -sL https://api.github.com/repos/buildpacks/pack/releases/latest | jq -r '.assets[].browser_download_url' | grep linux | grep -v sha256) | tar -C /tmp/new_cli -xvz
+sudo install -m 755 -g root -o root -Z /tmp/new_cli/pack /usr/local/bin/pack
+pack version
+rm -rf /tmp/new_cli/pack
+
 # clusterctl
 curl -sL -o /tmp/new_cli/clusterctl $(curl -sL https://api.github.com/repos/kubernetes-sigs/cluster-api/releases/latest | jq -r '.assets[].browser_download_url' | grep linux | grep amd64)
 sudo install -m 755 -g root -o root -Z /tmp/new_cli/clusterctl /usr/local/bin/clusterctl
