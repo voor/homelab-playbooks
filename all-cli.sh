@@ -20,7 +20,7 @@ sudo bash -c 'curl -L https://carvel.dev/install.sh | bash'
 mkdir -p /tmp/new_cli
 
 # pack
-curl -sL -o- $(curl -sL https://api.github.com/repos/buildpacks/pack/releases/latest | jq -r '.assets[].browser_download_url' | grep linux | grep -v sha256) | tar -C /tmp/new_cli -xvz
+curl -sL -o- $(curl -sL https://api.github.com/repos/buildpacks/pack/releases/latest | jq -r '.assets[].browser_download_url' | grep linux | grep -v sha256 | grep -v arm64) | tar -C /tmp/new_cli -xvz
 sudo install -m 755 -g root -o root -Z /tmp/new_cli/pack /usr/local/bin/pack
 pack version
 rm -rf /tmp/new_cli/pack
@@ -30,6 +30,12 @@ curl -sL -o /tmp/new_cli/clusterctl $(curl -sL https://api.github.com/repos/kube
 sudo install -m 755 -g root -o root -Z /tmp/new_cli/clusterctl /usr/local/bin/clusterctl
 clusterctl version
 rm -rf /tmp/new_cli/clusterctl
+
+# clusterawsadm
+curl -sL -o /tmp/new_cli/clusterawsadm $(curl -sL https://api.github.com/repos/kubernetes-sigs/cluster-api-provider-aws/releases/latest | jq -r '.assets[].browser_download_url' | grep linux | grep amd64)
+sudo install -m 755 -g root -o root -Z /tmp/new_cli/clusterawsadm /usr/local/bin/clusterawsadm
+clusterawsadm version
+rm -rf /tmp/new_cli/clusterawsadm
 
 # kind
 curl -sL -o /tmp/new_cli/kind $(curl -sL https://api.github.com/repos/kubernetes-sigs/kind/releases/latest | jq -r '.assets[].browser_download_url' | grep linux | grep amd64)
