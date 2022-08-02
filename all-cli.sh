@@ -4,7 +4,7 @@ set -euxo pipefail
 
 sudo -v
 
-sudo dnf install \
+sudo dnf -y install \
   $(curl -sL https://api.github.com/repos/wagoodman/dive/releases/latest | jq -r '.assets[].browser_download_url' | grep -e rpm) \
   $(curl -sL https://api.github.com/repos/open-policy-agent/conftest/releases/latest | jq -r '.assets[].browser_download_url' | grep -e rpm | grep -e amd64) \
   $(curl -sL https://api.github.com/repos/vmware-tanzu/octant/releases/latest | jq -r '.assets[].browser_download_url' | grep -e rpm | grep -e 64bit) \
@@ -91,5 +91,11 @@ curl -sL -o /tmp/new_cli/pinniped $(curl -sL https://api.github.com/repos/vmware
 sudo install -m 755 -g root -o root -Z /tmp/new_cli/pinniped /usr/local/bin/pinniped
 pinniped version
 rm -rf /tmp/new_cli/pinniped
+
+# tilt
+curl -sL -o- $(curl -sL https://api.github.com/repos/tilt-dev/tilt/releases/latest | jq -r '.assets[].browser_download_url' | grep linux | grep x86_64) | tar -C /tmp/new_cli -xvz tilt
+sudo install -m 755 -g root -o root -Z /tmp/new_cli/tilt /usr/local/bin/tilt
+tilt version
+rm -rf /tmp/new_cli/tilt
 
 rm -rf /tmp/new_cli
