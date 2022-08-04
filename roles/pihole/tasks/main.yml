@@ -19,6 +19,16 @@
     system: True
     shell: /usr/sbin/nologin
 
+- name: set DNS packet size
+  lineinfile:
+    path: /etc/dnsmasq.d/99-edns.conf
+    regexp: '^edns-packet-max'
+    line: 'edns-packet-max=1232'
+    create: yes
+    owner: root
+    group: root
+    mode: 0644
+
 - name: Download Pi-Hole installer
   get_url:
     url: https://install.pi-hole.net
