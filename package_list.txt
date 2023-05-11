@@ -550,6 +550,7 @@ make
 malcontent
 md4c
 mdadm
+meld
 mesa
 minizip
 mjpegtools
