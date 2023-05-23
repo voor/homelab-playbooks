@@ -29,6 +29,7 @@ autoconf
 automake
 avahi
 aws-cli
+aws-iam-authenticator
 aws-session-manager-plugin
 babl
 baobab
@@ -101,6 +102,7 @@ duktape
 e2fsprogs
 editorconfig-core-c
 efivar
+eksctl
 electron
 emacs
 enchant
@@ -281,8 +283,13 @@ iputils
 iso-codes
 jansson
 jasper
+java-environment-common
+java-runtime-common
 jbig2dec
+jdk-openjdk
 jq
+jre-openjdk
+jre-openjdk-headless
 js102
 json-c
 json-glib
@@ -420,6 +427,7 @@ libmtp
 libmysofa
 libnautilus-extension
 libndp
+libnet
 libnetfilter_conntrack
 libnewt
 libnfnetlink
@@ -612,6 +620,7 @@ opensc
 openssh
 openssl
 opus
+oras
 orc
 orca
 osinfo-db
@@ -790,6 +799,7 @@ talloc
 tar
 tcl
 tdb
+terraform
 tevent
 texinfo
 thin-provisioning-tools
@@ -801,6 +811,7 @@ totem-pl-parser
 tpm2-tss
 tracker3
 tracker3-miners
+tree
 tslib
 ttf-liberation
 ttf-meslo-nerd-font-powerlevel10k
