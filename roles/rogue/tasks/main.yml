@@ -24,6 +24,14 @@
     name: nginx
     state: present
 
+- name: Make sure config directory exists
+  file:
+    state: directory
+    path: /etc/nginx/conf.d/
+    owner: root
+    group: root
+    mode: 0775
+
 - name: nginx proxy configurations
   template:
     src: "{{ item }}"
