@@ -39,7 +39,7 @@
 - name: Make sure private directory exists
   file:
     state: directory
-    path: /etc/ssl/certs/private/
+    path: /etc/ssl/private/
     owner: root
     group: root
     mode: 0775
@@ -47,7 +47,7 @@
 - name: Copy latest certificate
   copy:
     src: "{{cert_fullchain}}"
-    dest: /etc/ssl/certs/private/cert.crt
+    dest: /etc/ssl/private/cert.crt
     owner: root
     group: root
     mode: 0644
@@ -57,7 +57,7 @@
 - name: Copy latest private keys
   copy:
     src: "{{cert_privkey}}"
-    dest: /etc/ssl/certs/private/cert.key
+    dest: /etc/ssl/private/cert.key
     owner: root
     group: root
     mode: 0644
@@ -72,7 +72,7 @@
 
 - name: Install PowerPanel CyperPower UPS
   package:
-    name: https://dl4jz3rbrsfum.cloudfront.net/software/powerpanel-132-0x86_64.rpm
+    name: powerpanel
     state: installed
 
 - name: PowerPanel service is enabled
