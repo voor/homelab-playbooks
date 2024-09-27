@@ -32,6 +32,15 @@
     group: root
     mode: 0775
 
+- name: nginx main configuration
+  template:
+    src: "nginx.conf"
+    dest: "/etc/nginx/nginx.conf"
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart nginx
+
 - name: nginx proxy configurations
   template:
     src: "{{ item }}"
