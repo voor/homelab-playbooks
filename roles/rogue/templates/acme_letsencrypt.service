@@ -1,0 +1,11 @@
+[Unit]
+Description=Renew Let's Encrypt certificates using acme.sh
+After=network-online.target nss-lookup.target
+
+[Service]
+Type=oneshot
+SyslogIdentifier=acme.sh
+# --home's argument should be where the acme.sh script resides.
+ExecStart=/usr/bin/acme.sh --cron --home /home/ruser/acme.sh
+User=ruser
+Group=ruser

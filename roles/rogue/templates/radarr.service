@@ -1,0 +1,42 @@
+[Unit]
+Description=Radarr Media Management (Podman)
+After=network-online.target podman.socket
+Wants=network-online.target podman.socket
+
+[Service]
+User=ruser
+Group=ruser
+Restart=on-failure
+WorkingDirectory=/home/ruser
+
+# Replace with the actual Radarr image and tag you want to use
+Environment=RADARR_IMAGE=ghcr.io/linuxserver/radarr:latest
+Environment=RADARR_CONTAINER_NAME=radarr
+
+# Define your desired ports, volumes, and other environment variables here
+# Example:
+Environment=PUID=1000
+Environment=PGID=1000
+Environment=TZ=America/New_York
+
+ExecStartPre=-/usr/bin/podman stop ${RADARR_CONTAINER_NAME}
+ExecStartPre=-/usr/bin/podman rm ${RADARR_CONTAINER_NAME}
+ExecStartPre=-/usr/bin/podman pull ${RADARR_CONTAINER_NAME}
+ExecStart=/usr/bin/podman run \
+    --name ${RADARR_CONTAINER_NAME} \
+    --security-opt label=disable \
+    --network host \
+    --env TZ=${TZ} \
+    --env PUID=${PUID} \
+    --env PGID=${PGID} \
+    --replace \
+    --volume /var/lib/radarr:/config:z \
+    --volume /var/local/downloads:/var/local/downloads:z \
+    --volume /storage/mnt/movies/Movies:/storage/mnt/movies/Movies:z \
+    ${RADARR_IMAGE}
+
+ExecStop=/usr/bin/podman stop ${RADARR_CONTAINER_NAME}
+ExecStopPost=/usr/bin/podman rm ${RADARR_CONTAINER_NAME}
+
+[Install]
+WantedBy=multi-user.target
