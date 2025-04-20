@@ -7,4 +7,31 @@
 - name: restart nginx
   service:
     name: nginx
+    daemon_reload: true
     state: restarted
+
+- name: restart radarr
+  service:
+    name: radarr
+    daemon_reload: true
+    state: restarted
+
+- name: restart sabnzbd
+  service:
+    name: sabnzbd
+    daemon_reload: true
+    state: restarted
+
+- name: restart sickchill
+  service:
+    name: sickchill
+    daemon_reload: true
+    state: restarted
+
+- name: restart from loop
+  service:
+    name: "{{ item }}"
+    daemon_reload: true
+    state: restarted
+
+    

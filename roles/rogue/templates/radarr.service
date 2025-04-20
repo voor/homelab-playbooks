@@ -2,6 +2,7 @@
 Description=Radarr Media Management (Podman)
 After=network-online.target podman.socket
 Wants=network-online.target podman.socket
+RequiresMountsFor=/storage/mnt/movies
 
 [Service]
 User=ruser
