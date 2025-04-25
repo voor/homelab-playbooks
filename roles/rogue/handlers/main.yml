@@ -27,11 +27,4 @@
     name: sickchill
     daemon_reload: true
     state: restarted
-
-- name: restart from loop
-  service:
-    name: "{{ item }}"
-    daemon_reload: true
-    state: restarted
-
     

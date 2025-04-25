@@ -21,6 +21,7 @@
   with_items:
     - sabnzbd
     - sickchill
+    - radarr
 
 - name: Copy radarr service file
   template:
@@ -42,4 +43,4 @@
     - radarr
     - sabnzbd
     - sickchill
-  notify: restart from loop
+  notify: "restart {{ item }}"
