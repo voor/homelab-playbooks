@@ -1,0 +1,50 @@
+
+
+- name: Copy satisfactory service file
+  template:
+    src: "satisfactory.service"
+    dest: "/etc/systemd/system/satisfactory.service"
+    owner: root
+    group: root
+    mode: 0755
+  notify: restart satisfactory
+
+- name: Make sure satisfactory main directory
+  file:
+    state: directory
+    path: "/home/ruser/satisfactory-server"
+    owner: ruser
+    group: ruser
+    mode: 0775
+
+- name: Make sure satisfactory directories exists
+  file:
+    state: directory
+    path: "/home/ruser/satisfactory-server/{{ item }}"
+    owner: 100999
+    group: 100999
+    mode: 0775
+  with_items:
+    - gamefiles
+    - gamefiles/FactoryGame
+    - gamefiles/FactoryGame/Certificates
+
+- name: Copy latest certificate
+  copy:
+    src: "{{factory_fullchain}}"
+    dest: /home/ruser/satisfactory-server/gamefiles/FactoryGame/Certificates/cert_chain.pem
+    owner: 100999
+    group: 100999
+    mode: 0644
+    force: yes
+  notify: restart satisfactory
+
+- name: Copy latest private keys
+  copy:
+    src: "{{factory_privkey}}"
+    dest: /home/ruser/satisfactory-server/gamefiles/FactoryGame/Certificates/private_key.pem
+    owner: 100999
+    group: 100999
+    mode: 0644
+    force: yes
+  notify: restart satisfactory

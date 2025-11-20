@@ -112,3 +112,5 @@
 #    - mysql
 
 - include_tasks: systemd.yml
+- include_tasks: satisfactory.yml
+- include_tasks: tronbyt-server.yml

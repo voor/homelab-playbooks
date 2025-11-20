@@ -1,0 +1,20 @@
+
+- name: Copy tronbyt service file
+  template:
+    src: "tronbyt-server.service"
+    dest: "/etc/systemd/system/tronbyt-server.service"
+    owner: root
+    group: root
+    mode: 0755
+  notify: restart tronbyt-server
+
+- name: Make sure tronbyt-server directories exists
+  file:
+    state: directory
+    path: "/home/ruser/tronbyt-server/{{ item }}"
+    owner: ruser
+    group: ruser
+    mode: 0775
+  with_items:
+    - data
+    - users

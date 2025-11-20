@@ -28,3 +28,15 @@
     daemon_reload: true
     state: restarted
     
+- name: restart tronbyt-server
+  service:
+    name: tronbyt-server
+    daemon_reload: true
+    state: restarted
+    
+- name: restart satisfactory
+  service:
+    name: satisfactory
+    daemon_reload: true
+    state: restarted
+    

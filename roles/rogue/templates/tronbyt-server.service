@@ -1,0 +1,46 @@
+[Unit]
+Description=Tronbyt Server (Podman)
+After=network-online.target podman.socket
+Wants=network-online.target podman.socket
+
+[Service]
+User=ruser
+Group=ruser
+Restart=on-failure
+WorkingDirectory=/home/ruser
+
+# Replace with the actual Tronbyt image and tag you want to use
+Environment=SERVER_IMAGE=ghcr.io/tronbyt/server:1
+Environment=SERVER_CONTAINER_NAME=tronbyt
+
+# Define your desired ports, volumes, and other environment variables here
+# Example:
+Environment=PUID=1000
+Environment=PGID=1000
+Environment=TZ=America/New_York
+
+ExecStartPre=-/usr/bin/podman stop ${SERVER_CONTAINER_NAME}
+ExecStartPre=-/usr/bin/podman rm ${SERVER_CONTAINER_NAME}
+ExecStartPre=-/usr/bin/podman pull ${SERVER_CONTAINER_NAME}
+ExecStart=/usr/bin/podman run \
+    --name=${SERVER_CONTAINER_NAME} \
+    --hostname ${SERVER_CONTAINER_NAME} \
+    --restart unless-stopped \
+    --volume /home/ruser/tronbyt-server/users:/app/users \
+    --volume /home/ruser/tronbyt-server/data:/app/data \
+    --env PGID=${PUID} \
+    --env PUID=${PGID} \
+    --env SYSTEM_APPS_REPO=1 \
+    --env PRODUCTION=1 \
+    --env ENABLE_USER_REGISTRATION=1 \
+    --env WEB_CONCURRENCY=1 \
+    --env TRONBYT_HOST=0.0.0.0 \
+    --env SINGLE_USER_AUTO_LOGIN=1 \
+    --publish 8000:8000/tcp \
+    ${SERVER_IMAGE}
+
+ExecStop=/usr/bin/podman stop ${SERVER_CONTAINER_NAME}
+ExecStopPost=/usr/bin/podman rm ${SERVER_CONTAINER_NAME}
+
+[Install]
+WantedBy=multi-user.target

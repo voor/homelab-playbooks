@@ -1,0 +1,45 @@
+[Unit]
+Description=Satisfactory Dedicated Server (Podman)
+After=network-online.target podman.socket
+Wants=network-online.target podman.socket
+
+[Service]
+User=ruser
+Group=ruser
+Restart=on-failure
+WorkingDirectory=/home/ruser
+
+# Replace with the actual Satisfactory image and tag you want to use
+Environment=SERVER_IMAGE=registry.hub.docker.com/wolveix/satisfactory-server:latest
+Environment=SERVER_CONTAINER_NAME=satisfactory
+
+# Define your desired ports, volumes, and other environment variables here
+# Example:
+Environment=PUID=1000
+Environment=PGID=1000
+Environment=TZ=America/New_York
+
+ExecStartPre=-/usr/bin/podman stop ${SERVER_CONTAINER_NAME}
+ExecStartPre=-/usr/bin/podman rm ${SERVER_CONTAINER_NAME}
+ExecStartPre=-/usr/bin/podman pull ${SERVER_CONTAINER_NAME}
+ExecStart=/usr/bin/podman run \
+    --name=${SERVER_CONTAINER_NAME} \
+    --hostname ${SERVER_CONTAINER_NAME} \
+    --restart unless-stopped \
+    --volume /home/ruser/satisfactory-server:/config \
+    --env MAXPLAYERS=4 \
+    --env PGID=${PUID} \
+    --env PUID=${PGID} \
+    --env STEAMBETA=false \
+    --memory-reservation=4G \
+    --memory 8G \
+    --publish 7777:7777/tcp \
+    --publish 7777:7777/udp \
+    --publish 8888:8888/tcp \
+    ${SERVER_IMAGE}
+
+ExecStop=/usr/bin/podman stop ${SERVER_CONTAINER_NAME}
+ExecStopPost=/usr/bin/podman rm ${SERVER_CONTAINER_NAME}
+
+[Install]
+WantedBy=multi-user.target
