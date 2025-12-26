@@ -12,8 +12,8 @@
   file:
     state: directory
     path: "/home/ruser/tronbyt-server/{{ item }}"
-    owner: ruser
-    group: ruser
+    owner: 100999
+    group: 100999
     mode: 0775
   with_items:
     - data

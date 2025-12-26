@@ -17,7 +17,6 @@ Environment=SERVER_CONTAINER_NAME=tronbyt
 # Example:
 Environment=PUID=1000
 Environment=PGID=1000
-Environment=TZ=America/New_York
 
 ExecStartPre=-/usr/bin/podman stop ${SERVER_CONTAINER_NAME}
 ExecStartPre=-/usr/bin/podman rm ${SERVER_CONTAINER_NAME}
@@ -28,6 +27,7 @@ ExecStart=/usr/bin/podman run \
     --restart unless-stopped \
     --volume /home/ruser/tronbyt-server/users:/app/users \
     --volume /home/ruser/tronbyt-server/data:/app/data \
+    --volume /etc/localtime:/etc/localtime:ro \
     --env PGID=${PUID} \
     --env PUID=${PGID} \
     --env SYSTEM_APPS_REPO=1 \
