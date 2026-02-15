@@ -16,6 +16,12 @@
     daemon_reload: true
     state: restarted
 
+- name: restart sonarr
+  service:
+    name: sonarr
+    daemon_reload: true
+    state: restarted
+
 - name: restart sabnzbd
   service:
     name: sabnzbd

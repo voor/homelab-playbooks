@@ -1,0 +1,41 @@
+[Unit]
+Description=sonarr Media Management (Podman)
+After=network-online.target podman.socket
+Wants=network-online.target podman.socket
+RequiresMountsFor=/storage/mnt/tv
+
+[Service]
+User=ruser
+Group=ruser
+Restart=on-failure
+WorkingDirectory=/home/ruser
+
+# Replace with the actual sonarr image and tag you want to use
+Environment=SONARR_IMAGE=ghcr.io/linuxserver/sonarr:latest
+Environment=SONARR_CONTAINER_NAME=sonarr
+
+# Define your desired ports, volumes, and other environment variables here
+# Example:
+Environment=PUID=0
+Environment=PGID=0
+Environment=TZ=America/New_York
+
+ExecStartPre=-/usr/bin/podman stop ${SONARR_CONTAINER_NAME}
+ExecStartPre=-/usr/bin/podman rm ${SONARR_CONTAINER_NAME}
+ExecStartPre=-/usr/bin/podman pull ${SONARR_CONTAINER_NAME}
+ExecStart=/usr/bin/podman run \
+    --name ${SONARR_CONTAINER_NAME} \
+    --network host \
+    --userns=keep-id \
+    --env TZ=${TZ} \
+    --replace \
+    --volume /var/lib/sonarr:/config:z \
+    --volume /var/local/downloads:/var/local/downloads:z \
+    --volume /storage/mnt/tv/shows:/storage/mnt/tv/shows:z \
+    ${SONARR_IMAGE}
+
+ExecStop=/usr/bin/podman stop ${SONARR_CONTAINER_NAME}
+ExecStopPost=/usr/bin/podman rm ${SONARR_CONTAINER_NAME}
+
+[Install]
+WantedBy=multi-user.target

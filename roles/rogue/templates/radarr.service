@@ -16,8 +16,8 @@ Environment=RADARR_CONTAINER_NAME=radarr
 
 # Define your desired ports, volumes, and other environment variables here
 # Example:
-Environment=PUID=1000
-Environment=PGID=1000
+Environment=PUID=0
+Environment=PGID=0
 Environment=TZ=America/New_York
 
 ExecStartPre=-/usr/bin/podman stop ${RADARR_CONTAINER_NAME}
@@ -25,7 +25,7 @@ ExecStartPre=-/usr/bin/podman rm ${RADARR_CONTAINER_NAME}
 ExecStartPre=-/usr/bin/podman pull ${RADARR_CONTAINER_NAME}
 ExecStart=/usr/bin/podman run \
     --name ${RADARR_CONTAINER_NAME} \
-    --security-opt label=disable \
+    --userns=keep-id \
     --network host \
     --env TZ=${TZ} \
     --env PUID=${PUID} \

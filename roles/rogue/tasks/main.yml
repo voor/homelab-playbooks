@@ -13,6 +13,7 @@
     state: present
   with_items:
     - p7zip
+    - python-jmespath
 
 - name: Ensure NFS utilities are installed.
   package:
@@ -84,17 +85,6 @@
 - name: Start nginx
   service:
     name: nginx
-    state: started
-    enabled: yes
-
-- name: Install PowerPanel CyperPower UPS
-  package:
-    name: powerpanel
-    state: installed
-
-- name: PowerPanel service is enabled
-  service:
-    name: pwrstatd
     state: started
     enabled: yes
 

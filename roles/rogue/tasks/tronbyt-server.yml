@@ -1,8 +1,8 @@
-
+---
 - name: Copy tronbyt service file
   template:
-    src: "tronbyt-server.service"
-    dest: "/etc/systemd/system/tronbyt-server.service"
+    src: tronbyt-server.service
+    dest: /etc/systemd/system/tronbyt-server.service
     owner: root
     group: root
     mode: 0755
@@ -11,10 +11,34 @@
 - name: Make sure tronbyt-server directories exists
   file:
     state: directory
-    path: "/home/ruser/tronbyt-server/{{ item }}"
-    owner: 100999
-    group: 100999
+    path: /home/ruser/tronbyt-server/{{ item }}
+    owner: ruser
+    group: ruser
     mode: 0775
   with_items:
     - data
     - users
+
+- name: Install latest Tronbyt server (AMD64)
+  block:
+    - name: Get latest release metadata from GitHub
+      ansible.builtin.uri:
+        url: "https://api.github.com/repos/tronbyt/server/releases/latest"
+        return_content: true
+      register: tronbyt_metadata
+
+    - name: Extract the AMD64 download URL
+      ansible.builtin.set_fact:
+        tronbyt_url: "{{ tronbyt_metadata.json.assets | json_query(tronbyt_query) }}"
+      vars:
+        # This query looks for the asset containing both 'linux' and 'amd64'
+        tronbyt_query: "[?contains(name, 'linux') && contains(name, 'amd64')].browser_download_url | [0]"
+
+    - name: Download Tronbyt binary to appropriate location
+      ansible.builtin.get_url:
+        url: "{{ tronbyt_url }}"
+        dest: "/usr/local/bin/tronbyt-server"
+        mode: '0755'
+        owner: root
+        group: root
+      when: tronbyt_url is defined
